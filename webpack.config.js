@@ -1,0 +1,29 @@
+
+module.exports = {
+	entry:{
+		index:"./index.js"
+	},
+	output:{
+		filename:'[name].js',
+		path:'./build/'
+	},
+	devServer:{
+		port:3000,
+		hot:true,
+		inline:true
+	},
+	module:{
+		loaders:[
+			{
+				test:/\.js$/,
+				exclude:/node_modules/,
+				loaders:['babel']
+			},
+			{
+				test:/\.css/,
+				exclude:/node_modules/,
+				loader:'style-loader!css-loader'
+			}
+		]
+	}
+}

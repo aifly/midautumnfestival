@@ -1,0 +1,31 @@
+{
+  "name": "midautumnfestival",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --inline --hot"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aifly/midautumnfestival.git"
+  },
+  "keywords": [
+    "canvas"
+  ],
+  "author": "fly",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aifly/midautumnfestival/issues"
+  },
+  "homepage": "https://github.com/aifly/midautumnfestival#readme",
+  "dependencies": {
+    "babel-core": "^5.8.38",
+    "babel-loader": "^5.3.2",
+    "css-loader": "^0.25.0",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.15.1"
+  }
+}
