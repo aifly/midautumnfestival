@@ -23,6 +23,7 @@ data.canvas.addEventListener("touchstart",e=>{
 
 });
 document.addEventListener('touchmove',e=>{
+	e.preventDefault();
 	if(isCanDraw){
 		var e = e.targetTouches[0];
 		moon.draw(e.pageX,e.pageY);	
