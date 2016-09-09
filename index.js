@@ -28,6 +28,7 @@ document.addEventListener('touchmove',e=>{
 		moon.draw(e.pageX,e.pageY);	
 		console.log(moon.pointArr.length)
 	}
+	return 0;
 });
 document.addEventListener('touchend',e=>{
 	isCanDraw =false;
