@@ -1,0 +1,153 @@
+
+html, body, div, p, ul, li, ol, dl, dt, dd, header, footer, video, h1, h2, h3, h4, canvas, section, figure {
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+html, body {
+  height: 100%;
+}
+
+img {
+  border: none;
+  vertical-align: top;
+  width: 100%;
+  height: auto;
+}
+
+@mixin pos($v) {
+  @if $v == a {
+    position: absolute;
+  } 
+  @else if $v == r {
+     position: relative;
+  } 
+  @else if $v == f {
+    position: fixed;
+  }
+}
+
+@mixin br($v:50%) {
+  border-radius: $v;
+}
+
+@mixin opacity($v:0) {
+  opacity: $v;
+}
+
+@mixin transform($v) {
+  -webkit-transform: $v;
+  transform: $v;
+}
+
+@mixin transitionDelay($time){
+  -webkit-transition-delay: $time;
+  transition-delay: $time;
+}
+
+
+@mixin transformOrigin($v) {
+  -webkit-transform-origin: $v;
+  transform-origin: $v;
+}
+
+@mixin backgroundSize($v:cover) {
+  background-size: $v;
+}
+
+@mixin transition_transform($v) {
+  -webkit-transition: -webkit-transform $v;
+  transition: transform $v;
+}
+
+@mixin transform_origin($v:center) {
+  -webkit-transform-origin: $v;
+  transform-origin: $v;
+}
+
+@mixin transition($v) {
+  -webkit-transition: $v;
+  transition: $v;
+}
+
+@mixin transitionTimingFunction($v:cubic-bezier(0, 0.9, 0.17, 1.01))
+{
+  -webkit-transition-timing-function: $v;
+  transition-timing-function: $v;
+}
+
+@mixin transform($v) {
+  -webkit-transform: $v;
+  transform: $v;
+}
+
+@mixin background($bg) {
+  background: $bg;
+}
+
+@mixin backgroundSize($v:cover) {
+  background-size: $v;
+}
+
+@mixin animation($v) {
+  -webkit-animation: $v;
+  animation: $v;
+}
+@mixin animationDelay($time){
+  -webkit-animation-delay:$time;
+          animation-delay:$time;
+}
+
+@mixin transform3d() {
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  perspective: 800px;
+  -webkit-perspective: 800px;
+}
+
+@mixin displayBox($v) {
+  display: -webkit-box;
+  -webkit-box-align: center;
+  -webkit-box-pack: center;
+  -webkit-box-orient: $v;
+}
+
+@mixin fly-h-gradient-line {
+  background: -webkit-gradient(linear, left top, right top, from(rgba(204, 204, 204, .2)), color-stop(0.5, rgba(204, 204, 204, 1)), to(rgba(204, 204, 204, .2)));
+  background: -moz-linear-gradient(left, rgba(204, 204, 204, .2), rgba(204, 204, 204, 1) 50%, rgba(204, 204, 204, .2));
+  background: -ms-linear-gradient(left, rgba(204, 204, 204, .2), rgba(204, 204, 204, 1) 50%, rgba(204, 204, 204, .2));
+}
+
+@mixin fly-v-gradient-line($minOpacity:.2,$maxOpacity:1) {
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(204, 204, 204, $minOpacity)), color-stop(0.5, rgba(204, 204, 204, $maxOpacity)), to(rgba(204, 204, 204, $minOpacity)));
+  background: -moz-linear-gradient(top, rgba(204, 204, 204, $minOpacity), rgba(204, 204, 204, $maxOpacity) 50%, rgba(204, 204, 204, $minOpacity));
+  background: -ms-linear-gradient(top, rgba(204, 204, 204, $minOpacity), rgba(204, 204, 204, $maxOpacity) 50%, rgba(204, 204, 204, $minOpacity));
+}
+
+@mixin displayFlex($v:column) {
+  display: flex;
+  display: -webkit-flex;
+  flex-flow: $v;
+}
+
+.shake-little{display:inline-block;-webkit-transform-origin:center center}
+.shake-freeze,.shake-constant.shake-constant--hover:hover,.shake-trigger:hover .shake-constant.shake-constant--hover{-webkit-animation-play-state:paused}.shake-freeze:hover,.shake-trigger:hover .shake-freeze,.shake-little:hover,.shake-trigger:hover .shake-little{-webkit-animation-play-state:running}@-webkit-keyframes shake-little{2%{-webkit-transform:translate(0px, 1px) rotate(0.5deg)}4%{-webkit-transform:translate(1px, 1px) rotate(0.5deg)}6%{-webkit-transform:translate(1px, 0px) rotate(0.5deg)}8%{-webkit-transform:translate(1px, 0px) rotate(0.5deg)}10%{-webkit-transform:translate(1px, 0px) rotate(0.5deg)}12%{-webkit-transform:translate(1px, 0px) rotate(0.5deg)}14%{-webkit-transform:translate(0px, 0px) rotate(0.5deg)}16%{-webkit-transform:translate(0px, 0px) rotate(0.5deg)}18%{-webkit-transform:translate(0px, 0px) rotate(0.5deg)}20%{-webkit-transform:translate(0px, 1px) rotate(0.5deg)}22%{-webkit-transform:translate(0px, 1px) rotate(0.5deg)}24%{-webkit-transform:translate(1px, 1px) rotate(0.5deg)}26%{-webkit-transform:translate(1px, 0px) rotate(0.5deg)}28%{-webkit-transform:translate(0px, 0px) rotate(0.5deg)}30%{-webkit-transform:translate(1px, 0px) rotate(0.5deg)}32%{-webkit-transform:translate(0px, 0px) rotate(0.5deg)}34%{-webkit-transform:translate(1px, 0px) rotate(0.5deg)}36%{-webkit-transform:translate(0px, 0px) rotate(0.5deg)}38%{-webkit-transform:translate(1px, 0px) rotate(0.5deg)}40%{-webkit-transform:translate(0px, 0px) rotate(0.5deg)}42%{-webkit-transform:translate(1px, 1px) rotate(0.5deg)}44%{-webkit-transform:translate(0px, 0px) rotate(0.5deg)}46%{-webkit-transform:translate(0px, 0px) rotate(0.5deg)}48%{-webkit-transform:translate(0px, 1px) rotate(0.5deg)}50%{-webkit-transform:translate(0px, 0px) rotate(0.5deg)}52%{-webkit-transform:translate(0px, 0px) rotate(0.5deg)}54%{-webkit-transform:translate(0px, 1px) rotate(0.5deg)}56%{-webkit-transform:translate(0px, 0px) rotate(0.5deg)}58%{-webkit-transform:translate(1px, 0px) rotate(0.5deg)}60%{-webkit-transform:translate(0px, 1px) rotate(0.5deg)}62%{-webkit-transform:translate(0px, 0px) rotate(0.5deg)}64%{-webkit-transform:translate(1px, 1px) rotate(0.5deg)}66%{-webkit-transform:translate(1px, 0px) rotate(0.5deg)}68%{-webkit-transform:translate(0px, 0px) rotate(0.5deg)}70%{-webkit-transform:translate(1px, 1px) rotate(0.5deg)}72%{-webkit-transform:translate(0px, 1px) rotate(0.5deg)}74%{-webkit-transform:translate(0px, 0px) rotate(0.5deg)}76%{-webkit-transform:translate(0px, 0px) rotate(0.5deg)}78%{-webkit-transform:translate(0px, 1px) rotate(0.5deg)}80%{-webkit-transform:translate(1px, 0px) rotate(0.5deg)}82%{-webkit-transform:translate(1px, 0px) rotate(0.5deg)}84%{-webkit-transform:translate(0px, 0px) rotate(0.5deg)}86%{-webkit-transform:translate(0px, 1px) rotate(0.5deg)}88%{-webkit-transform:translate(1px, 1px) rotate(0.5deg)}90%{-webkit-transform:translate(0px, 0px) rotate(0.5deg)}92%{-webkit-transform:translate(1px, 1px) rotate(0.5deg)}94%{-webkit-transform:translate(1px, 1px) rotate(0.5deg)}96%{-webkit-transform:translate(1px, 0px) rotate(0.5deg)}98%{-webkit-transform:translate(0px, 1px) rotate(0.5deg)}0%,100%{-webkit-transform:translate(0, 0) rotate(0)}}.shake-little:hover,.shake-trigger:hover .shake-little,.shake-little.shake-freeze,.shake-little.shake-constant{-webkit-animation-duration:100ms;-webkit-animation-iteration-count:infinite;-webkit-animation-name:shake-little;-webkit-animation-timing-function:ease-in-out}
+
+$baseColor:#d1bdbd;
+$baseColor1:#e89e79;
+$maxIndex:9999;
+body{
+  background:#000;
+  overflow: hidden;
+  font-size: .1rem;
+  font-family: 'Microsoft Yahei', Tahoma, Helvetica, Arial, sans-serif;
+  color:$baseColor;
+}

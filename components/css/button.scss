@@ -1,0 +1,235 @@
+@mixin pos($v) {
+  @if $v == a {
+    position: absolute;
+  } 
+  @else if $v == r {
+     position: relative;
+  } 
+  @else if $v == f {
+    position: fixed;
+  }
+}
+
+@mixin br($v:50%) {
+  border-radius: $v;
+}
+
+@mixin opacity($v:0) {
+  opacity: $v;
+}
+
+@mixin transform($v) {
+  -webkit-transform: $v;
+  transform: $v;
+}
+
+@mixin transitionDelay($time){
+  -webkit-transition-delay: $time;
+  transition-delay: $time;
+}
+
+
+@mixin transformOrigin($v) {
+  -webkit-transform-origin: $v;
+  transform-origin: $v;
+}
+
+@mixin backgroundSize($v:cover) {
+  background-size: $v;
+}
+
+@mixin transition_transform($v) {
+  -webkit-transition: -webkit-transform $v;
+  transition: transform $v;
+}
+
+@mixin transform_origin($v:center) {
+  -webkit-transform-origin: $v;
+  transform-origin: $v;
+}
+
+@mixin transition($v) {
+  -webkit-transition: $v;
+  transition: $v;
+}
+
+@mixin transitionTimingFunction($v:cubic-bezier(0, 0.9, 0.17, 1.01))
+{
+  -webkit-transition-timing-function: $v;
+  transition-timing-function: $v;
+}
+
+@mixin transform($v) {
+  -webkit-transform: $v;
+  transform: $v;
+}
+
+@mixin background($bg) {
+  background: $bg;
+}
+
+@mixin backgroundSize($v:cover) {
+  background-size: $v;
+}
+
+@mixin animation($v) {
+  -webkit-animation: $v;
+  animation: $v;
+}
+@mixin animationDelay($time){
+  -webkit-animation-delay:$time;
+          animation-delay:$time;
+}
+
+@mixin transform3d() {
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  perspective: 800px;
+  -webkit-perspective: 800px;
+}
+
+@mixin displayBox($v) {
+  display: -webkit-box;
+  -webkit-box-align: center;
+  -webkit-box-pack: center;
+  -webkit-box-orient: $v;
+}
+
+@mixin fly-h-gradient-line {
+  background: -webkit-gradient(linear, left top, right top, from(rgba(204, 204, 204, .2)), color-stop(0.5, rgba(204, 204, 204, 1)), to(rgba(204, 204, 204, .2)));
+  background: -moz-linear-gradient(left, rgba(204, 204, 204, .2), rgba(204, 204, 204, 1) 50%, rgba(204, 204, 204, .2));
+  background: -ms-linear-gradient(left, rgba(204, 204, 204, .2), rgba(204, 204, 204, 1) 50%, rgba(204, 204, 204, .2));
+}
+
+@mixin fly-v-gradient-line($minOpacity:.2,$maxOpacity:1) {
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(204, 204, 204, $minOpacity)), color-stop(0.5, rgba(204, 204, 204, $maxOpacity)), to(rgba(204, 204, 204, $minOpacity)));
+  background: -moz-linear-gradient(top, rgba(204, 204, 204, $minOpacity), rgba(204, 204, 204, $maxOpacity) 50%, rgba(204, 204, 204, $minOpacity));
+  background: -ms-linear-gradient(top, rgba(204, 204, 204, $minOpacity), rgba(204, 204, 204, $maxOpacity) 50%, rgba(204, 204, 204, $minOpacity));
+}
+
+@mixin displayFlex($v:column) {
+  display: flex;
+  display: -webkit-flex;
+  flex-flow: $v;
+}
+
+.fly-button-C{
+   
+}
+
+.horizontal-btn{
+    width: 3rem;
+    height: 1rem;
+    @include pos(r);
+
+  &.active{
+     .fly-button-t{
+        width: 105%;
+        height: 106%;
+        @include transform(translate3d(3px,6px,0));
+        box-shadow: 0 0 1rem rgba(255,255,255,.4),0 0 1rem rgba(255,255,255,.4) inset;
+     }
+    .fly-button-b{
+        opacity:0;
+     }
+    
+  }
+  .fly-button-t{
+    width: inherit;
+    height: inherit;
+    border:2px solid #fff;
+    @include br(10px);
+    font-size: .6rem; 
+    text-align: center;
+    line-height: 1rem;
+
+  }
+
+  .fly-button-b{
+      @include pos(a);
+      width: 105%;
+      height: 106%;
+      border:2px solid #fff;
+      border-left: none;
+      border-top: none;
+      left: 3px;
+      top: 6px; 
+      @include br(10px);
+  }
+  .linex{
+    width: 0;
+    height: 4px;
+    border-left:1px solid #fff;
+    top: 90%;
+    @include pos(a);
+  }
+  .liney{
+    width: 6px;
+    right: 0;
+    height: 0;
+    border-top:1px solid #fff;
+    margin-top: 10px;
+    @include pos(a);
+  }
+}
+
+.vertical-btn{
+    $color:#f22;
+    width: 1rem;
+    height: 2.4rem;
+    @include pos(r);
+
+    &.active{
+       .fly-button-t{
+          width: 105%;
+          height: 106%;
+          @include transform(translate3d(-6px,4px,0));
+          box-shadow: 0 0 1rem rgba(255,0,0,.4),0 0 1rem rgba(255,0,0,.4) inset;
+       }
+      .fly-button-b{
+          opacity:0;
+       }
+      
+    }
+
+    .fly-button-t{
+      width: inherit;
+      height: inherit;
+      border:2px solid  $color;
+      @include br(10px);
+      font-size: .6rem; 
+      padding: .13rem .05rem;
+      text-align: center;
+      line-height: 1rem;
+      color:$color;
+
+    }
+
+    .fly-button-b{
+        @include pos(a);
+        padding: .13rem .05rem;
+        width: 105%;
+        height: 100%;
+        border:2px solid  $color;
+        border-right: none;
+        border-top: none;
+        left: -5px;
+        top: 8px; 
+        @include br(10px);
+    }
+    .linex{
+      width: 0;
+      height: 4px;
+      border-left:1px solid  $color;
+      top: 96.5%;
+      @include pos(a);
+    }
+    .liney{
+      width: 6px;
+      left: -1px;
+      height: 0;
+      border-top:1px solid  $color;
+      margin-top: 10px;
+      @include pos(a);
+    }
+}

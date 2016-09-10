@@ -1,0 +1,92 @@
+.horizontal-btn {
+  width: 3rem;
+  height: 1rem;
+  position: relative; }
+  .horizontal-btn.active .fly-button-t {
+    width: 105%;
+    height: 106%;
+    -webkit-transform: translate3d(3px, 6px, 0);
+    transform: translate3d(3px, 6px, 0);
+    box-shadow: 0 0 1rem rgba(255, 255, 255, 0.4), 0 0 1rem rgba(255, 255, 255, 0.4) inset; }
+  .horizontal-btn.active .fly-button-b {
+    opacity: 0; }
+  .horizontal-btn .fly-button-t {
+    width: inherit;
+    height: inherit;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    font-size: .6rem;
+    text-align: center;
+    line-height: 1rem; }
+  .horizontal-btn .fly-button-b {
+    position: absolute;
+    width: 105%;
+    height: 106%;
+    border: 2px solid #fff;
+    border-left: none;
+    border-top: none;
+    left: 3px;
+    top: 6px;
+    border-radius: 10px; }
+  .horizontal-btn .linex {
+    width: 0;
+    height: 4px;
+    border-left: 1px solid #fff;
+    top: 90%;
+    position: absolute; }
+  .horizontal-btn .liney {
+    width: 6px;
+    right: 0;
+    height: 0;
+    border-top: 1px solid #fff;
+    margin-top: 10px;
+    position: absolute; }
+
+.vertical-btn {
+  width: 1rem;
+  height: 2.4rem;
+  position: relative; }
+  .vertical-btn.active .fly-button-t {
+    width: 105%;
+    height: 106%;
+    -webkit-transform: translate3d(-6px, 4px, 0);
+    transform: translate3d(-6px, 4px, 0);
+    box-shadow: 0 0 1rem rgba(255, 0, 0, 0.4), 0 0 1rem rgba(255, 0, 0, 0.4) inset; }
+  .vertical-btn.active .fly-button-b {
+    opacity: 0; }
+  .vertical-btn .fly-button-t {
+    width: inherit;
+    height: inherit;
+    border: 2px solid #f22;
+    border-radius: 10px;
+    font-size: .6rem;
+    padding: .13rem .05rem;
+    text-align: center;
+    line-height: 1rem;
+    color: #f22; }
+  .vertical-btn .fly-button-b {
+    position: absolute;
+    padding: .13rem .05rem;
+    width: 105%;
+    height: 100%;
+    border: 2px solid #f22;
+    border-right: none;
+    border-top: none;
+    left: -5px;
+    top: 8px;
+    border-radius: 10px; }
+  .vertical-btn .linex {
+    width: 0;
+    height: 4px;
+    border-left: 1px solid #f22;
+    top: 96.5%;
+    position: absolute; }
+  .vertical-btn .liney {
+    width: 6px;
+    left: -1px;
+    height: 0;
+    border-top: 1px solid #f22;
+    margin-top: 10px;
+    position: absolute; }
+
+/*# sourceMappingURL=button.css.map */

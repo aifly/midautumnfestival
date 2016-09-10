@@ -1,7 +1,7 @@
 
 module.exports = {
 	entry:{
-		index:"./index.js"
+		index:"./index.jsx"
 	},
 	output:{
 		filename:'[name].js',
@@ -15,7 +15,7 @@ module.exports = {
 	module:{
 		loaders:[
 			{
-				test:/\.js$/,
+				test:/\.jsx|\.js$/,
 				exclude:/node_modules/,
 				loaders:['babel']
 			},
