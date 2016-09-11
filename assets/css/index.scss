@@ -145,9 +145,165 @@ $baseColor:#d1bdbd;
 $baseColor1:#e89e79;
 $maxIndex:9999;
 body{
-  background:#000;
+  background:#200c41;
   overflow: hidden;
   font-size: .1rem;
   font-family: 'Microsoft Yahei', Tahoma, Helvetica, Arial, sans-serif;
   color:$baseColor;
+}
+
+.fly-meteor-C{
+   width: 3rem;
+   left: 20%;
+  @include pos(a);
+  @include transform(translate3d(100%,-100%,0));
+  @include animation(meteorMove 5s infinite 2s);
+}
+.meteor{
+  width: 3rem;
+
+}
+
+.fly-meteor-C1{
+   width: 2rem;
+   left: 80%;
+   top: 60%;
+  @include pos(a);
+  @include transform(translate3d(100%,-100%,0));
+  @include animation(meteorMove1 5s infinite 1s);
+}
+
+@mixin transitionTime($time:6s){
+  @include transition_transform($time);
+}
+
+.fly-shine{
+   width: 5rem;
+   height:3rem;
+   @include br(42%);
+   @include pos(a);
+   left: 30%;
+   top: 25%;
+   z-index: -1;
+   -webkit-filter: blur(30px);
+   box-shadow:0 0 6rem rgba(130,28,155,1),0 0 6rem rgba(130,28,155,1) inset ;
+   @include transform(scale(0)); 
+   
+   @include transitionTime();
+   &.active{
+      @include transform(scale(1)); 
+   }
+}
+
+.fly-moon{
+   @include pos(a);
+   top: 1.5rem;
+   left: 1.4rem;
+   width: 10rem;
+   
+   @include transitionTime();
+   
+}
+
+.fly-moon-heart{
+   @include pos(a);
+   width: 9rem;
+   top: 1.8rem;
+   @include transitionTime();
+}
+
+.fly-text{
+   width: 8rem;
+   @include pos(a);
+   left: 3rem;
+   top: 7.8rem;
+   p{
+    color:#9e4941;
+    font-size: .4rem;
+    line-height: 24px;
+    &:nth-of-type(2){
+      text-indent:2em;
+  
+    }
+   }
+}
+
+.fly-window{
+  @include pos(a);
+  bottom:-5.5rem;
+   @include transitionTime();
+}
+
+.fly-women{
+  @include pos(a);
+  bottom:0;
+  width: 6rem;
+  @include transitionTime();
+}
+.fly-rabbit{
+  @include pos(a);
+  bottom:0;
+  width: 2rem;
+  right: 0;
+  @include transitionTime();
+
+}
+
+
+.fly-main-C{
+  
+  &.active{
+    .fly-moon-heart{
+      @include transform(translate3d(-5rem,-5rem,0) scale(0));
+    }
+    .fly-moon{
+      @include transform(translate3d(5rem,-5rem,0) scale(0)); 
+    }
+    .fly-women{
+      @include transform(translate3d(-10rem,0,0));  
+    }
+    .fly-rabbit{
+      @include transform(translate3d(3rem,0,0));   
+    }
+    .fly-window{
+      @include transform(translate3d(0,-5.5rem,0));   
+    }
+    .fly-shine{
+      @include transform(scale(.8));
+    }
+    .fly-star-C{
+      @include transitionTime(4s);
+      @include transform(scale(.9));
+    }
+    .fly-text{
+      p{
+        @include transitionTime(4s);
+        &:nth-of-type(1){
+          @include transform(translate3d(-10.5rem,-2.5rem,0));   
+        }
+        &:nth-of-type(2){
+          @include transform(translate3d(7rem,-2.5rem,0));   
+        }
+      }
+    }
+  }
+}
+
+
+@-webkit-keyframes meteorMove{
+  0% {
+    @include transform(translate3d(100%,-100%,0));
+  }
+  50%,100%{
+    @include transform(translate3d(0,0,0));
+  }
+}
+
+@-webkit-keyframes meteorMove1{
+  0% {
+    @include transform(translate3d(100%,-100%,0));
+  }
+  50%,100%{
+    @include transform(translate3d(-50%,30%,0));
+  }
 }

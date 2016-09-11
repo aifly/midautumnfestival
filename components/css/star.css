@@ -1,0 +1,20 @@
+.fly-star-C {
+  position: absolute;
+  top: 0;
+  z-index: -1; }
+  .fly-star-C .fly-star {
+    background: #fff;
+    border-radius: 50%;
+    position: absolute;
+    -webkit-filter: blur(1px); }
+    .fly-star-C .fly-star.animate {
+      -webkit-animation: flash 0.8s infinite linear alternate;
+      animation: flash 0.8s infinite linear alternate; }
+
+@-webkit-keyframes flash {
+  0% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+
+/*# sourceMappingURL=star.css.map */

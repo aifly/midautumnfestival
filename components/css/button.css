@@ -7,17 +7,20 @@
     height: 106%;
     -webkit-transform: translate3d(3px, 6px, 0);
     transform: translate3d(3px, 6px, 0);
-    box-shadow: 0 0 1rem rgba(255, 255, 255, 0.4), 0 0 1rem rgba(255, 255, 255, 0.4) inset; }
+    box-shadow: 0 0 1rem rgba(255, 255, 255, 0.7), 0 0 1rem rgba(255, 255, 255, 0.4) inset; }
   .horizontal-btn.active .fly-button-b {
     opacity: 0; }
   .horizontal-btn .fly-button-t {
-    width: inherit;
-    height: inherit;
+    width: 3rem;
+    height: 1rem;
     border: 2px solid #fff;
     border-radius: 10px;
     font-size: .6rem;
     text-align: center;
-    line-height: 1rem; }
+    line-height: 1rem;
+    position: absolute;
+    left: 0;
+    top: 0; }
   .horizontal-btn .fly-button-b {
     position: absolute;
     width: 105%;
@@ -51,7 +54,7 @@
     height: 106%;
     -webkit-transform: translate3d(-6px, 4px, 0);
     transform: translate3d(-6px, 4px, 0);
-    box-shadow: 0 0 1rem rgba(255, 0, 0, 0.4), 0 0 1rem rgba(255, 0, 0, 0.4) inset; }
+    box-shadow: 0 0 1rem rgba(255, 0, 0, 0.7), 0 0 1rem rgba(255, 0, 0, 0.4) inset; }
   .vertical-btn.active .fly-button-b {
     opacity: 0; }
   .vertical-btn .fly-button-t {
