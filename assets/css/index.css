@@ -176,9 +176,7 @@ body {
   -webkit-transform: scale(0);
   transform: scale(0);
   -webkit-transition: -webkit-transform 6s;
-  transition: -webkit-transform 6s;
-  transition: transform 6s;
-  transition: transform 6s, -webkit-transform 6s; }
+  transition: transform 6s; }
   .fly-shine.active {
     -webkit-transform: scale(1);
     transform: scale(1); }
@@ -189,18 +187,14 @@ body {
   left: 1.4rem;
   width: 10rem;
   -webkit-transition: -webkit-transform 6s;
-  transition: -webkit-transform 6s;
-  transition: transform 6s;
-  transition: transform 6s, -webkit-transform 6s; }
+  transition: transform 6s; }
 
 .fly-moon-heart {
   position: absolute;
   width: 9rem;
   top: 1.8rem;
   -webkit-transition: -webkit-transform 6s;
-  transition: -webkit-transform 6s;
-  transition: transform 6s;
-  transition: transform 6s, -webkit-transform 6s; }
+  transition: transform 6s; }
 
 .fly-text {
   width: 8rem;
@@ -218,18 +212,14 @@ body {
   position: absolute;
   bottom: -5.5rem;
   -webkit-transition: -webkit-transform 6s;
-  transition: -webkit-transform 6s;
-  transition: transform 6s;
-  transition: transform 6s, -webkit-transform 6s; }
+  transition: transform 6s; }
 
 .fly-women {
   position: absolute;
   bottom: 0;
   width: 6rem;
   -webkit-transition: -webkit-transform 6s;
-  transition: -webkit-transform 6s;
-  transition: transform 6s;
-  transition: transform 6s, -webkit-transform 6s; }
+  transition: transform 6s; }
 
 .fly-rabbit {
   position: absolute;
@@ -237,9 +227,7 @@ body {
   width: 2rem;
   right: 0;
   -webkit-transition: -webkit-transform 6s;
-  transition: -webkit-transform 6s;
-  transition: transform 6s;
-  transition: transform 6s, -webkit-transform 6s; }
+  transition: transform 6s; }
 
 .fly-main-C.active .fly-moon-heart {
   -webkit-transform: translate3d(-5rem, -5rem, 0) scale(0);
@@ -261,22 +249,44 @@ body {
   transform: scale(0.8); }
 .fly-main-C.active .fly-star-C {
   -webkit-transition: -webkit-transform 4s;
-  transition: -webkit-transform 4s;
   transition: transform 4s;
-  transition: transform 4s, -webkit-transform 4s;
   -webkit-transform: scale(0.9);
   transform: scale(0.9); }
 .fly-main-C.active .fly-text p {
   -webkit-transition: -webkit-transform 4s;
-  transition: -webkit-transform 4s;
-  transition: transform 4s;
-  transition: transform 4s, -webkit-transform 4s; }
+  transition: transform 4s; }
   .fly-main-C.active .fly-text p:nth-of-type(1) {
     -webkit-transform: translate3d(-10.5rem, -2.5rem, 0);
     transform: translate3d(-10.5rem, -2.5rem, 0); }
   .fly-main-C.active .fly-text p:nth-of-type(2) {
     -webkit-transform: translate3d(7rem, -2.5rem, 0);
     transform: translate3d(7rem, -2.5rem, 0); }
+.fly-main-C.active .fly-box {
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0); }
+.fly-main-C.active .fly-rabbit-r {
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0); }
+
+.fly-box {
+  width: 5rem;
+  position: absolute;
+  bottom: 1.8rem;
+  left: 4rem;
+  -webkit-transform: translate3d(-9rem, 0, 0);
+  transform: translate3d(-9rem, 0, 0);
+  -webkit-transition: -webkit-transform 3s 5s linear;
+  transition: transform 3s 5s linear; }
+
+.fly-rabbit-r {
+  width: 2rem;
+  bottom: 2.5rem;
+  left: 0.7rem;
+  position: absolute;
+  -webkit-transform: translate3d(-6.4rem, 0, 0);
+  transform: translate3d(-6.4rem, 0, 0);
+  -webkit-transition: -webkit-transform 2.13s 5s linear;
+  transition: transform 2.13s 5s linear; }
 
 @-webkit-keyframes meteorMove {
   0% {

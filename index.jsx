@@ -71,6 +71,14 @@ class App extends Component {
 					<img src='./assets/images/rabbit.png'/>
 				</div>
 
+				<div className='fly-box'>
+					<img src='./assets/images/box.png' />
+				</div>
+
+				<div className='fly-rabbit-r'>
+					<img src='./assets/images/rabbit_r.png' />
+				</div>
+
 				<Star {...starProps}></Star>
 
 

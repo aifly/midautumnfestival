@@ -286,9 +286,38 @@ body{
         }
       }
     }
+    .fly-box{
+      @include transform(translate3d(0,0,0));
+    }
+    .fly-rabbit-r{
+      @include transform(translate3d(0,0,0));
+    }
   }
 }
 
+.fly-box{
+  $width:5rem;
+  $left:4rem;
+  width:$width;
+  @include pos(a);
+  bottom:1.8rem;
+  left: $left;
+  @include transform(translate3d(-($width + $left),0,0));
+  @include transition_transform(3s 5s linear);
+
+}
+
+.fly-rabbit-r{
+  $width:2rem;
+  $left : .7rem;
+  width: $width;
+  bottom:2.5rem;
+  left: $left;
+  @include pos(a);
+  @include transform(translate3d(-($width + $left + 3.7,0,0)));
+  @include transition_transform(2.13s 5s linear);
+  
+}
 
 @-webkit-keyframes meteorMove{
   0% {
