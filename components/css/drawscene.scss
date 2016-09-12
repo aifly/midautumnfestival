@@ -113,129 +113,42 @@
   flex-flow: $v;
 }
 
-.fly-button-C{
-  span{
-    display:inline-block;
-  }
-}
-
-.horizontal-btn{
-    width: 3rem;
-    height: 1rem;
-    @include pos(r);
-    
-
-  &.active{
-     .fly-button-t{
-        width: 105%;
-        height: 106%;
-        @include transform(translate3d(3px,6px,0));
-        box-shadow: 0 0 1rem rgba(255,255,255,.7),0 0 1rem rgba(255,255,255,.4) inset;
-     }
-    .fly-button-b{
-        opacity:0;
-     }
-    
-  }
-  .fly-button-t{
-    width: 3rem;
-    height: 1rem;
-    border:2px solid #fff;
-    @include br(10px);
-    font-size: .6rem; 
-    text-align: center;
-    line-height: 1rem;
+.fly-draw-scene{
+    width: 10rem;
     @include pos(a);
     left: 0;
-    top: 0;
-
-  }
-
-  .fly-button-b{
-      @include pos(a);
-      width: 105%;
-      height: 106%;
-      border:2px solid #fff;
-      border-left: none;
-      border-top: none;
-      left: 3px;
-      top: 6px; 
-      @include br(10px);
-  }
-  .linex{
-    width: 0;
-    height: 4px;
-    border-left:1px solid #fff;
-    top: 90%;
-    @include pos(a);
-  }
-  .liney{
-    width: 6px;
-    right: 0;
-    height: 0;
-    border-top:1px solid #fff;
-    margin-top: 10px;
-    @include pos(a);
-  }
-}
-
-.vertical-btn{
-    $color:#f22;
-    width: 1rem;
-    height: 2.4rem;
-    @include pos(r);
-
-    &.active{
-       .fly-button-t{
-          width: 105%;
-          height: 106%;
-          @include transform(translate3d(-6px,4px,0));
-          box-shadow: 0 0 1rem rgba(255,0,0,.7),0 0 1rem rgba(255,0,0,.4) inset;
-       }
-      .fly-button-b{
-          opacity:0;
-       }
-      
-    }
-
-    .fly-button-t{
-      width: inherit;
-      height: inherit;
-      border:2px solid  $color;
-      @include br(10px);
-      font-size: .6rem; 
-      padding: .13rem .05rem;
+    top: 1rem;
+    header{
       text-align: center;
-      line-height: 1rem;
-      color:$color;
+      font-size: .5rem;
+    }
+    .fly-draw-C{
+      background:rgba(255,255,255,.3);
+      margin:10px 0;
+      canvas{
+        @include pos(r);
+        z-index: 1;   
+      }
+      @include pos(r);
+      .fly-center-circle{
+         $width: 8rem;
+         width: $width;
+         height: $width;
+         border:1px dashed #f2e75d;
+         @include pos(a);
+         @include br(50%);
+         background:#746867;
+        top:(10 - $width)/2;
+        left:(10 - $width)/2;
+        z-index: 0;
+      }
+    }
+    .fly-btn-C{
+      @include displayBox(horizontal);
+      div.fly-button-C{
+         margin:0 20px;
+      }
 
-    }
 
-    .fly-button-b{
-        @include pos(a);
-        padding: .13rem .05rem;
-        width: 105%;
-        height: 100%;
-        border:2px solid  $color;
-        border-right: none;
-        border-top: none;
-        left: -5px;
-        top: 8px; 
-        @include br(10px);
-    }
-    .linex{
-      width: 0;
-      height: 4px;
-      border-left:1px solid  $color;
-      top: 96.5%;
-      @include pos(a);
-    }
-    .liney{
-      width: 6px;
-      left: -1px;
-      height: 0;
-      border-top:1px solid  $color;
-      margin-top: 10px;
-      @include pos(a);
     }
 }

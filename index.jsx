@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import Moon from './libs/moon';
+
 import Button from './components/Button.jsx';
 import Star from './components/star.jsx';
+
+import DriftDown from './libs/driftdown';
+import DrawScene from './components/draw-scene.jsx';
 
 import './assets/css/index.css';
 /*let moon = new Moon({
@@ -15,7 +18,6 @@ let data = {
 	width:document.documentElement.clientWidth,
 	height:document.documentElement.clientHeight	
 }
-
 
 
 var util = {
@@ -32,17 +34,45 @@ var util = {
 util.init();
 
 class App extends Component {
+	constructor(props) {
+		super(props);
+	  this.state = {
+	  	 images:[
+	  	 	'moon-heart',
+	  	 	'latern',
+	  	 	'latern',
+	  	 	'latern',
+	  	 	'plum',
+	  	 	'house',
+	  	 	'window',
+	  	 	'rabbit',
+	  	 	'rabbit-r',
+	  	 	'women',
+	  	 	'box',
+	  	 	'petal',
+	  	 	'petal',
+	  	 	'petal',
+
+	  	 ]
+	  };
+	  this.showBox = this.showBox.bind(this);
+	}
 	render() {
 		let starProps = {
 			width:data.width,
 			height : data.height
 		}
+
 		return (
-			<div ref='main' className='fly-main-C'>
+			<div ref='main' className='fly-main-C drawscene' onTouchTap={this.showBox}>
 				<div className='fly-meteor-C'>
 					<img src='./assets/images/meteor.png' className='meteor'/>
 				</div>
 				<div className='fly-meteor-C fly-meteor-C1'>
+					<img src='./assets/images/meteor.png' className='meteor'/>
+				</div>
+
+				<div className='fly-meteor-C fly-meteor-C2'>
 					<img src='./assets/images/meteor.png' className='meteor'/>
 				</div>
 				
@@ -54,31 +84,36 @@ class App extends Component {
 					<div className='fly-shine'></div>
 				</div>
 
-				<div className='fly-moon-heart'>
-					<img src='./assets/images/moon-heart.png'/>
-				</div>
+				
 				<article className='fly-text'>
 					<p>一轮圆月，温暖有你陪伴的时光；</p>
 					<p>一段心声，跨越咫尺天涯的距离。</p>
 				</article>
-				<div className='fly-window'>
-					<img src='./assets/images/window.png'/>
-				</div>
-				<div className='fly-women'>
-					<img src='./assets/images/women.png'/>
-				</div>
-				<div className='fly-rabbit'>
-					<img src='./assets/images/rabbit.png'/>
+
+				{this.state.images.map((item,i)=>{
+					return(
+						<div key={i}  className={'fly-'+item}>
+							<img src={'./assets/images/'+item+'.png'}/>
+						</div>
+					)
+				})}
+
+				<div className='fly-sun-sm' style={{background:"url(./assets/images/sun-sm.png) no-repeat center",
+  backgroundSize:"contain"}}>
+					<img src='./assets/images/smail.gif'/>
 				</div>
 
-				<div className='fly-box'>
-					<img src='./assets/images/box.png' />
+				<div className='fly-box-btn'>
+					<Button text='点击礼盒' click={false} textStyle={{width:'.6rem',height:'3rem',fontSize:'.5rem',lineHeight:'26px'}}  className='vertical-btn'></Button>
 				</div>
 
-				<div className='fly-rabbit-r'>
-					<img src='./assets/images/rabbit_r.png' />
+
+				<div className="fly-dialog">
+					<img src='./assets/images/dialog.png'/>
+					<Button countX={24} text='制作我的月亮信笺' className="horizontal-btn my-moon-letterhead" callBack={this.entryDrawPannel.bind(this)}></Button>	
 				</div>
 
+				<DrawScene></DrawScene>
 				<Star {...starProps}></Star>
 
 
@@ -96,6 +131,30 @@ class App extends Component {
 
 		);
 	}
+
+	showBox(e){//打开盒子
+		
+		if(this.getStyle(e.target.parentNode,'opacity')<=.5){
+			return;
+		}
+		if(e.target.parentNode.classList.contains('fly-box')){
+			e.target.src='./assets/images/boxopen.png';
+			this.refs['main'].querySelector('.fly-sun-sm').classList.add('active');
+		}
+	}
+
+	getStyle(ele,val){
+
+	  var style = null;
+      
+      if(window.getComputedStyle) {
+          style = window.getComputedStyle(ele, null);
+      }else{
+          style = ele.currentStyle;
+      }
+   	  return style[val];
+
+	}
 	reDraw(){
 		console.log('reDraw()');
 	}
@@ -104,25 +163,105 @@ class App extends Component {
 	}
 	componentDidMount() {
 		this.showShine();
-		//this.showMoon();
+		let main = this.refs['main'];
+		this.main=  main;
 		setTimeout(()=>{
-			this.refs['main'].classList.add('active');
+			//main.classList.add('active');
+			//this.float(); 
 		},1000);
+
+		main.querySelector('.fly-rabbit-r').addEventListener('webkitTransitionEnd',()=>{
+			setTimeout(()=>{
+				main.querySelector('.fly-rabbit-r img').src ='./assets/images/rabbit-l.png';
+			},500);
+		});
+	}
+
+	float(){
+		let petals = this.refs['main'].querySelectorAll('.fly-petal'),
+			latern =  this.refs['main'].querySelectorAll('.fly-latern'),
+			petalArr = [];
+			this.petalArr= petalArr;
+		for(var i =0 ;i<petals.length;i++){
+			let petal = new DriftDown({
+				petal:petals[i],
+
+			});
+			petalArr.push(petal);
+		}
+		
+		for(var i =0 ;i<latern.length;i++){
+			let petal = new DriftDown({
+				petal:latern[i],
+				up:true,
+				maxHeight:-750
+			});
+			petalArr.push(petal);
+		}
+		
+		var m = Math;
+
+		this.timer = setInterval(()=>{
+
+			petalArr.forEach((petal)=>{
+				petal.angle+=(petal.speed);
+				petal.angle>=360 && (petal.angle = 0);
+				m.abs(petal.startY) > m.abs(petal.maxHeight) &&(petal.startY = 0,petal.angle =0,petal.speedY = Math.random()+.5,petal.startX = 0,petal.rotation = Math.random()*180);
+				petal.startX += m.sin(petal.angle/180*m.PI)/2;
+
+				if(petal.up){
+					petal.startY-=petal.speedY/2;
+					petal.startX += m.sin(petal.angle/180*m.PI)/2*m.random();
+				}
+				else{
+					petal.startY+=petal.speedY;
+				}
+				
+				petal.startMove(petal.startX,petal.startY);
+			});
+		},1000/60);
 	}
 
 	showShine(){
 		var shines = this.refs['main'].querySelectorAll('.fly-shine'),
 			len = shines.length;
-			for(var i = 0; i < len ; i++){
-				shines[i].classList.add('active');
-			}
+		for(var i = 0; i < len ; i++){
+			shines[i].classList.add('active');
+		}
+	}
+
+	entryDrawPannel(){//进入绘制区域
 		
+		this.main.classList.remove('active');
+		this.main.classList.add('drawscene');
+		
+		this.petalArr.forEach((petal)=>{
+			petal.stop();
+		});
+
+		this.timer && clearInterval(this.timer);
+
+		let dialog =this.main.querySelector('.fly-dialog');
+		dialog.classList.add('hide');
+		dialog.addEventListener('webkitTransitionEnd',()=>{
+			dialog.classList.add('none');
+		});
+
 	}
-	showMoon(){
-		setTimeout(()=>{
-			this.refs['moon'].classList.add('active');
-		},1500)
+
+	rabbitOut(){
+		this.main.querySelector('.fly-rabbit-r').classList.add('hide');
+		this.main.querySelector('.fly-box-btn').classList.add('hide');
+
 	}
+
+	plumOut(){
+		this.main.querySelector('.fly-plum').style.opacity=0;
+		this.main.querySelectorAll('.fly-petal')[0].style.opacity=0;
+		this.main.querySelectorAll('.fly-petal')[1].style.opacity=0;
+		this.main.querySelectorAll('.fly-petal')[2].style.opacity=0;
+	}
+	
 
 }
 

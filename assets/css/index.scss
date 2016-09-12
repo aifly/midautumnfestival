@@ -155,6 +155,7 @@ body{
 .fly-meteor-C{
    width: 3rem;
    left: 20%;
+   opacity:0;
   @include pos(a);
   @include transform(translate3d(100%,-100%,0));
   @include animation(meteorMove 5s infinite 2s);
@@ -166,12 +167,25 @@ body{
 
 .fly-meteor-C1{
    width: 2rem;
-   left: 80%;
-   top: 60%;
+   left: 50%;
+   top: 10%;
+   opacity:0;
   @include pos(a);
   @include transform(translate3d(100%,-100%,0));
   @include animation(meteorMove1 5s infinite 1s);
 }
+
+.fly-meteor-C2{
+   width: 2rem;
+   left: 70%;
+   top: 30%;
+   opacity:0;
+    @include pos(a);
+    @include transform(translate3d(100%,-100%,0));
+    @include animation(meteorMove1 5s infinite 3s);
+}
+
+
 
 @mixin transitionTime($time:6s){
   @include transition_transform($time);
@@ -245,15 +259,13 @@ body{
   bottom:0;
   width: 2rem;
   right: 0;
+
   @include transitionTime();
 
 }
 
-
-.fly-main-C{
-  
-  &.active{
-    .fly-moon-heart{
+@mixin public(){
+  .fly-moon-heart{
       @include transform(translate3d(-5rem,-5rem,0) scale(0));
     }
     .fly-moon{
@@ -265,17 +277,11 @@ body{
     .fly-rabbit{
       @include transform(translate3d(3rem,0,0));   
     }
-    .fly-window{
-      @include transform(translate3d(0,-5.5rem,0));   
-    }
+    
     .fly-shine{
       @include transform(scale(.8));
     }
-    .fly-star-C{
-      @include transitionTime(4s);
-      @include transform(scale(.9));
-    }
-    .fly-text{
+     .fly-text{
       p{
         @include transitionTime(4s);
         &:nth-of-type(1){
@@ -286,53 +292,232 @@ body{
         }
       }
     }
+}
+
+.fly-main-C{
+
+  &.drawscene{
+    @include public();
+      .fly-box{
+        @include transition(opacity 2s);
+      }
+     .fly-window{
+         @include transform(translate3d(0,10.5rem,0));   
+      }
+      .fly-rabbit-r{
+        @include transition_transform(2.13s linear);
+      }
+
+      .fly-box-btn{
+        @include transition(2.1s  linear);
+      }
+
+      .fly-plum{
+         @include transition(opacity 3s );
+      }
+      .fly-petal{
+         @include transition(opacity 3s);
+      }
+  }
+  
+  &.active{
+    @include public();
+    .fly-star-C{
+      @include transitionTime(4s);
+      @include transform(scale(.9));
+    }
+    .fly-window{
+      @include transform(translate3d(0,-5.5rem,0));   
+    }
+    .fly-latern{
+      opacity:1;
+    }
     .fly-box{
+      z-index: 1;
+      opacity:1;
+    }
+    .fly-rabbit-r,.fly-box-btn{
       @include transform(translate3d(0,0,0));
     }
-    .fly-rabbit-r{
-      @include transform(translate3d(0,0,0));
-    }
+
+    .fly-plum{
+         opacity:1;
+      }
+      .fly-petal{
+         opacity:1;
+      }
   }
 }
 
 .fly-box{
-  $width:5rem;
+  $width:6rem;
   $left:4rem;
   width:$width;
   @include pos(a);
   bottom:1.8rem;
   left: $left;
-  @include transform(translate3d(-($width + $left),0,0));
-  @include transition_transform(3s 5s linear);
-
+  opacity:0;
+  @include transition(opacity 2s 4s);
 }
 
 .fly-rabbit-r{
   $width:2rem;
   $left : .7rem;
   width: $width;
-  bottom:2.5rem;
+  bottom:3rem;
   left: $left;
   @include pos(a);
-  @include transform(translate3d(-($width + $left + 3.7,0,0)));
+  @include transform(translate3d(-($width + $left + 1,0,0)));
   @include transition_transform(2.13s 5s linear);
+  &.hide{
+    @include transform(translate3d(-($width + $left + 1,0,0)));
+  }
   
 }
 
+.fly-box-btn{
+  @include pos(a);
+  left: 2.8rem;
+  bottom:5.5rem;
+  @include transform(translate3d(-4rem,0,0));
+  @include transition(2.1s 5s linear);
+  &.hide{
+      opacity:0;
+  }
+}
+
+.fly-plum{
+   width: 5rem;
+   @include pos(a);
+   top:10%;
+   @include transition(opacity 3s 4s);
+   opacity:0;
+}
+.fly-petal{
+    width: .5rem;
+   @include pos(a);
+   top:25%;
+   left:5%;
+   @include transition(opacity 3s 4s);
+   opacity:0;
+   
+   &:nth-of-type(2){
+     left: 10%;
+     top: 30% !important;
+   }
+   &:nth-of-type(3){
+      left: 17%;
+   }
+}
+
+.fly-latern{
+    @include pos(a);
+    width: 3rem;
+    bottom:0;
+    left: 20%;
+    opacity:0;
+}
+
+.fly-sun-sm{
+  width: 4rem;
+  height: 4rem;
+  text-align: center;
+  @include pos(a);
+  bottom:5.5rem;
+  right: .7rem;
+  z-index: -1;
+  opacity:0;
+  &.active{
+    z-index: 1;
+    opacity:1;
+    @include transform(translate3d(0,-7rem,0));
+    -webkit-transition:-webkit-transform 5s 3s linear,opacity 3s  linear;
+  }
+  img{
+    width: 60%;
+    margin-top: 1.2rem;
+  }
+}
+
+.fly-house{
+  @include pos(a);
+  bottom:0;
+
+}
+
+.fly-dialog{
+  @include pos(a);
+    display: none;
+  &.none{
+    display: none;
+  }
+
+  &.hide{
+    opacity:0;
+    @include transition(opacity 1s .5s);
+  }
+  top: 25%;
+  width: 90%;
+  .my-moon-letterhead{
+     @include pos(a);
+     width: 4rem;
+      &.active{
+         .fly-button-t{
+              box-shadow: 0 0 1rem rgba(222,88,24,.7), 0 0 1rem rgba(222,88,24,.7),0 0 2rem rgba(222,88,24,.4) inset;
+           }
+          .fly-button-b{
+              opacity:0;
+           }
+        }
+     .fly-button-b,.fly-button-t{
+        width: 4rem;
+        height: 1.2rem;
+        line-height: 1.2rem;
+        border-color:#de5818 !important;
+        .linex,.liney{
+            border-color:#de5818 !important;
+        }
+        .linex{
+          top:91%;
+        }
+        .liney{
+          right:-2px;
+        }
+     }
+     span{
+      font-size:.41rem;
+     }
+     .fly-button-b{
+       width:4.1rem;
+     }
+     left: 25%;
+     bottom:1.4rem;
+     color:#de5818;
+
+  }
+}
+
+
+
+
 @-webkit-keyframes meteorMove{
   0% {
+    opacity:0;
     @include transform(translate3d(100%,-100%,0));
   }
   50%,100%{
     @include transform(translate3d(0,0,0));
+    opacity:1;
   }
 }
 
 @-webkit-keyframes meteorMove1{
   0% {
+    opacity:0;
     @include transform(translate3d(100%,-100%,0));
   }
   50%,100%{
     @include transform(translate3d(-50%,30%,0));
+    opacity:1;
   }
 }

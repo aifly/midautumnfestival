@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+	import React, { Component } from 'react';
 import './css/button.css';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
@@ -13,20 +13,22 @@ export default class Button extends Component {
 	}
 	
 	touchStart(){
-		this.refs['fly-button-C'].classList.add('active');
+		this.props.click && this.refs['fly-button-C'].classList.add('active');
 	}
 
 	touchEnd(){
-		this.refs['fly-button-C'].classList.remove('active');
+		this.props.click && this.refs['fly-button-C'].classList.remove('active');
 	}
 
 	render() {
 
-		let {color,text,className,callBack} = this.props;
+		let {color,text,className,callBack,textStyle,countX,countY} = this.props;
 		let linesX = [],
 			linesY = [];
-		if(className === 'horizontal-btn'){
-			for(var i = 0 ; i <23 ; i++){
+
+		if(className.indexOf('horizontal-btn')>-1){
+
+			for(var i = 0 ; i <countX ; i++){
 				var style = {
 					left:(4+i * 4 )+"%",
 					WebkitTransform:'rotate('+(-Math.random()*30|0)+'deg)'
@@ -43,7 +45,7 @@ export default class Button extends Component {
 				)
 			}
 
-			for(var i = 0 ; i <9 ; i++){
+			for(var i = 0 ; i <countY ; i++){
 				var style = {
 					top:(0+i*10)+"%",
 					WebkitTransform:'rotate('+(Math.random()*20|0)+'deg)'
@@ -100,10 +102,17 @@ export default class Button extends Component {
 		}
 		
 
+		let valStyle = {
+
+		}
+
+		this.addProperty(textStyle, valStyle,['width','height','border','fontSize','lineHeight']);
 		
 		return (
 			<div onTouchTap={callBack} ref='fly-button-C' className={'fly-button-C  ' + className } onTouchStart={this.touchStart} onTouchEnd={this.touchEnd}>
-				<div className='fly-button-t'>{text}</div>
+				<div className='fly-button-t' >
+					<span style={valStyle}>{text}</span>
+				</div>
 				<div className='fly-button-b'>
 					{linesX}
 					{linesY}
@@ -112,13 +121,26 @@ export default class Button extends Component {
 			</div>
 		);
 	}
+	addProperty(obj,obj1,vals){
+		vals.forEach(val=>{
+			if(obj[val]){
+				obj1[val] = obj[val];
+			}	
+		})
+	}
 }
 
 Button.defaultProps = {
 	color:'#fff',
 	className:'horizontal-btn',
 	text:'清空',
+	countX:23,
+	countY:9,
+	textStyle:{
+
+	},
+	click:true,
 	callBack:(e)=>{
-		console.log(e);
+		
 	}
 }
