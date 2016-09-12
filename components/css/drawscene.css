@@ -16,7 +16,7 @@
     .fly-draw-scene .fly-draw-C .fly-center-circle {
       width: 8rem;
       height: 8rem;
-      border: 1px dashed #f2e75d;
+      border: 3px dashed #f2e75d;
       position: absolute;
       border-radius: 50%;
       background: #746867;
