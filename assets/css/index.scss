@@ -295,7 +295,7 @@ body{
 }
 
 .fly-main-C{
-
+  overflow: hidden;
   &.drawscene{
     @include public();
       .fly-box{
