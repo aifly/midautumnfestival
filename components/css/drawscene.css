@@ -2,7 +2,41 @@
   width: 10rem;
   position: absolute;
   left: 0;
-  top: 1rem; }
+  top: 1rem;
+  display: none; }
+  .fly-draw-scene.active {
+    display: block; }
+  .fly-draw-scene .fly-text-img {
+    position: absolute;
+    left: 1rem;
+    top: 0;
+    opacity: 0;
+    z-index: -1;
+    -webkit-transition: 5s opacity 2s;
+    transition: 5s opacity 2s;
+    width: 8rem; }
+    .fly-draw-scene .fly-text-img.active {
+      opacity: 1; }
+  .fly-draw-scene .fly-share-rabbit {
+    width: 2.5rem;
+    position: fixed;
+    bottom: 3rem;
+    left: 1rem;
+    opacity: 0;
+    -webkit-transition: 1s opacity 2s;
+    transition: 1s opacity 2s; }
+    .fly-draw-scene .fly-share-rabbit.active {
+      opacity: 1; }
+  .fly-draw-scene .fly-logo {
+    width: 2rem;
+    position: fixed;
+    bottom: .5rem;
+    left: 1rem;
+    opacity: 0;
+    -webkit-transition: 1s opacity 2s;
+    transition: 1s opacity 2s; }
+    .fly-draw-scene .fly-logo.active {
+      opacity: 1; }
   .fly-draw-scene header {
     text-align: center;
     font-size: .5rem; }
@@ -27,10 +61,10 @@
     transition: 1s opacity; }
   .fly-draw-scene.hide .fly-card-C {
     opacity: 1;
-    -webkit-transition: -webkit-transform 4s 2s;
-    transition: -webkit-transform 4s 2s;
-    transition: transform 4s 2s;
-    transition: transform 4s 2s, -webkit-transform 4s 2s;
+    -webkit-transition: -webkit-transform 2s 1s;
+    transition: -webkit-transform 2s 1s;
+    transition: transform 2s 1s;
+    transition: transform 2s 1s, -webkit-transform 2s 1s;
     left: 0;
     color: #893c0e;
     top: 1rem; }
@@ -41,11 +75,13 @@
       top: 4.2rem;
       width: 64%;
       left: 18%;
-      color: inherit; }
+      color: inherit;
+      font-size: .4rem; }
     .fly-draw-scene.hide .fly-card-C .fly-wish-name {
       position: absolute;
       color: inherit;
       top: 8.3rem;
+      font-size: .4rem;
       right: 1.5rem; }
     .fly-draw-scene.hide .fly-card-C .fly-wish-content {
       position: absolute;
@@ -61,6 +97,7 @@
       outline: none;
       top: 12rem;
       width: 7rem;
+      height: .6rem;
       left: 1.5rem;
       background: transparent;
       border: 1px solid #ccc; }
@@ -83,10 +120,8 @@
           top: 89%; }
   .fly-draw-scene .fly-card-C {
     opacity: 0;
-    -webkit-transition: -webkit-transform 4s 2s;
-    transition: -webkit-transform 4s 2s;
-    transition: transform 4s 2s;
-    transition: transform 4s 2s, -webkit-transform 4s 2s;
+    -webkit-transition: 2s 2s;
+    transition: 2s 2s;
     position: absolute;
     -webkit-transform: translate3d(0, 3rem, 0);
     transform: translate3d(0, 3rem, 0); }

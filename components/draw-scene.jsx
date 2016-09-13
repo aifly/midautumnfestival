@@ -10,12 +10,17 @@ export default class DrawScene extends Component {
 	
 	  this.state = {
 	  	 face:'',
-	  	 style:{}
+	  	 style:{},
+	  	 wishContent:'中秋节 月圆是画，月缺是诗。如诗如画，良辰美景，送给我心爱的你。遥远的星空下，共同仰望同样的美月，是你我心灵的契约！ ',
+	  	 wishAuthor:'某某某'
 	  };
 	}
 	render() {
 		return (
-			<div className='fly-draw-scene' ref='fly-draw-scene'>
+			<div className='fly-draw-scene ' ref='fly-draw-scene'>
+				<img src='./assets/images/text.png' className='fly-text-img' ref='fly-text-img'/>
+				<img src='./assets/images/share-btn.png' className='fly-share-rabbit' ref='fly-share-rabbit'/>
+				<img src='./assets/images/logo.png' className='fly-logo' ref='fly-logo'/>
 				<header>开始绘制我的私人订制月亮吧</header>
 				<div className='fly-draw-C' ref='fly-draw-C'>
 					<canvas ref='draw'></canvas>
@@ -29,10 +34,10 @@ export default class DrawScene extends Component {
 				<div className='fly-card-C' ref='fly-card-C'>
 					<img src='./assets/images/card.png'/>
 					{this.state.face && <img src={this.state.face} ref='fly-face' className='fly-face' style={this.state.style} />}
-					<p className='fly-wish-words' ref='fly-wish-words'>中秋节 月圆是画，月缺是诗。如诗如画，良辰美景，送给我心爱的你。遥远的星空下，共同仰望同样的美月，是你我心灵的契约！ </p>
-					<p className='fly-wish-name' ref='fly-wish-name'>@某某某</p>
-					<textarea onChange={this.checkWords.bind(this)} ref='fly-wish-content' className='fly-wish-content' placeholder='输入我的祝福语(50字以内)'></textarea>
-					<input ref='fly-wish-author' className='fly-wish-author' placeholder='祝福人'/>
+					<p className='fly-wish-words' ref='fly-wish-words'>{this.state.wishContent}</p>
+					<p className='fly-wish-name' ref='fly-wish-name'>@{this.state.wishAuthor}</p>
+					<textarea onFocus={this.wishContentfocus.bind(this)} onBlur={this.wishContentblur.bind(this)} onChange={this.checkWords.bind(this)} ref='fly-wish-content' className='fly-wish-content' placeholder='输入我的祝福语(50字以内)' defaultValue={this.state.wishContent}></textarea>
+					<textarea onChange={()=>{}} ref='fly-wish-author' className='fly-wish-author' onFocus={this.wishContentfocus.bind(this)} onBlur={this.wishContentblur.bind(this)}  placeholder='祝福人' defaultValue={this.state.wishAuthor}></textarea>
 					<div className='fly-wish-btns' ref='fly-wish-btns'>
 						<Button callBack={this.clearWish.bind(this)}></Button>
 						<Button callBack={this.prepareShare.bind(this)} text='确定'></Button>	
@@ -46,16 +51,31 @@ export default class DrawScene extends Component {
 		 
 		setTimeout(()=>{
 			this.canvasInit(this.setSize());
-		},1)
+		},1);
+		
 	}
 
-	checkWords(e){
+	wishContentfocus(e){
+		//document.getElementById('fly-main').style.WebkitTransform='translate3d(0,0,0)';
+		let isName =e.target.classList.contains('fly-wish-author');
+		//document.getElementById('fly-main').style.WebkitTransform='translate3d(0,'+(isName?'-8.7rem':'-7.7rem')+',0)'
+		e.target.style.WebkitTransform =  'translate3d(0,'+(isName?'-7rem':'-6rem')+',0)';
+		e.target.style.background =  '#fff';
+
+	}
+	wishContentblur(e){
+		//document.getElementById('fly-main').style.WebkitTransform='translate3d(0,0,0)'
+		e.target.style.WebkitTransform =  'translate3d(0,0,0)';
+		e.target.style.background =  'transparent';
+	}
+
+	checkWords(e){//检查输入的祝福内容的字数
 		if(e.target.value.length > 50){
 			e.target.value = e.target.value.substr(0,50);
 		}
 	}
 
-	clearWish(){
+	clearWish(){//清空祝福语
 		this.refs['fly-wish-author'].value = '';
 		this.refs['fly-wish-content'].value = '';
 	}
@@ -63,6 +83,35 @@ export default class DrawScene extends Component {
 	prepareShare(){//点击确定准备开始跳转到分享的页面去。
 		this.refs['fly-wish-words'].innerHTML = this.refs['fly-wish-content'].value;
 		this.refs['fly-wish-name'].innerHTML = this.refs['fly-wish-author'].value;
+		let card=this.refs['fly-card-C'];
+		card.style.WebkitTransform = 'scale(.1)';
+		card.style.WebkitTransformOrigin = 'top';
+		let doc = document;
+		doc.querySelector('.fly-window').classList.add('active');
+		doc.querySelector('.fly-box').classList.add('active');
+		
+		setTimeout(()=>{
+			doc.querySelector('.fly-box img').src='./assets/images/boxopen.png';			
+			card.style.WebkitTransform = 'scale(.1) translate(24rem,80rem)';
+			card.style.WebkitTransition = '2s 1s';
+			card.style.opacity = 0;
+			setTimeout(()=>{
+				doc.querySelector('.fly-box img').src='./assets/images/box.png';
+				let data ={
+					img:this.state.face,
+					content:encodeURI(this.state.wishContent),
+					author:encodeURI(this.state.wishAuthor)
+				}
+ 				let json = encodeURI(JSON.stringify(data));
+				window.location.href='./share.html?data='+json;
+			},4000);
+
+			window.float();
+			this.refs['fly-text-img'].classList.add('active');
+			this.refs['fly-share-rabbit'].classList.add('active');
+			this.refs['fly-logo'].classList.add('active');
+		},8*1000);
+
 	}
 
 	reDraw(){//重绘
@@ -112,7 +161,7 @@ export default class DrawScene extends Component {
 						self.refs['fly-face'].onload = function(){
 							this.style.WebkitTransition = '3.6s';
 							//this.style.WebkitTransform = 'translate3d('+(-2)+'rem,0,0)';
-							self.refs['fly-card-C'].style.WebkitTransform = 'translate3d(0,0,0)';
+							self.refs['fly-card-C'].style.WebkitTransform = 'translate3d(0,-1.7rem,0)';
 							self.refs['fly-draw-scene'].classList.add('hide');
 						}
 					})
@@ -188,6 +237,13 @@ export default class DrawScene extends Component {
 	}
 
 	masks(size){
+		let imgs = [
+			'./assets/images/face1.png',
+			'./assets/images/face2.png',
+			'./assets/images/face3.png',
+			'./assets/images/face4.png',
+			'./assets/images/face5.png'
+		];
 		var img = new Image();
 		let self = this;
 		img.onload = function(){
@@ -200,7 +256,8 @@ export default class DrawScene extends Component {
 			bitMap.mask = self.shape;
 			self.stage.update();
 		}
-		img.src=  './assets/images/face1.png';
+		let index = Math.random()*5|0;
+		img.src=  imgs[index];
 	}
 
 	draw(x,y,flag = true,flag1 = false){

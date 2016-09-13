@@ -6,14 +6,12 @@ import Star from './components/star.jsx';
 
 import DriftDown from './libs/driftdown';
 import DrawScene from './components/draw-scene.jsx';
-import {utilMethods, _$, $$} from './libs/utilMethod.js';
-import './assets/css/index.css';
- 
-/*let moon = new Moon({
-	width:document.documentElement.clientWidth,
-	height:document.documentElement.clientHeight
 
-});*/
+import ShareCard from './components/share-card.jsx';
+
+import './assets/css/share.css';
+
+
 
 let data = {
 	width:document.documentElement.clientWidth,
@@ -41,56 +39,21 @@ class App extends Component {
 	  this.state = {
 	  	shadow:false,
 	  	 images:[
-	  	 	'moon-heart',
 	  	 	'latern',
 	  	 	'latern',
 	  	 	'latern',
 	  	 	'plum',
 	  	 	'house',
 	  	 	'window',
-	  	 	'rabbit',
 	  	 	'rabbit-r',
-	  	 	'women',
 	  	 	'box',
 	  	 	'petal',
 	  	 	'petal',
 	  	 	'petal',
 
-	  	 ],
-	  	 loadingImgs:[
-	  	 	'./assets/images/300.jpg',
-	  	 	'./assets/images/box.png',
-	  	 	'./assets/images/boxopen.png',
-	  	 	'./assets/images/dialog.png',
-	  	 	'./assets/images/face1.png',
-	  	 	'./assets/images/face2.png',
-	  	 	'./assets/images/face3.png',
-	  	 	'./assets/images/face4.png',
-	  	 	'./assets/images/face5.png',
-	  	 	'./assets/images/finger.png',
-	  	 	'./assets/images/house.png',
-	  	 	'./assets/images/latern.png',
-	  	 	'./assets/images/logo.png',
-	  	 	'./assets/images/meteor.png',
-	  	 	'./assets/images/moon.png',
-	  	 	'./assets/images/moon-heart.png',
-	  	 	'./assets/images/petal.png',
-	  	 	'./assets/images/plum.png',
-	  	 	'./assets/images/rabbit.png',
-	  	 	'./assets/images/rabbit-r.png',
-	  	 	'./assets/images/rabbit-l.png',
-	  	 	'./assets/images/shadow.png',
-	  	 	'./assets/images/share-btn.png',
-	  	 	'./assets/images/smail.gif',
-	  	 	'./assets/images/sun-sm.png',
-	  	 	'./assets/images/sun-sm.png',
-	  	 	'./assets/images/text.png',
-	  	 	'./assets/images/window.png',
-	  	 	'./assets/images/women.png'
 	  	 ]
 	  };
 	  this.showBox = this.showBox.bind(this);
-
 	}
 	render() {
 		let starProps = {
@@ -118,19 +81,7 @@ class App extends Component {
 					<img src='./assets/images/meteor.png' className='meteor'/>
 				</div>
 				
-				<div className='fly-moon' ref='moon'>
-					<img src='./assets/images/moon.png'/> 
-					<div className='fly-shine'></div>
-					<div className='fly-shine'></div>
-					<div className='fly-shine'></div>
-					<div className='fly-shine'></div>
-				</div>
-
 				
-				<article className='fly-text'>
-					<p>一轮圆月，温暖有你陪伴的时光；</p>
-					<p>一段心声，跨越咫尺天涯的距离。</p>
-				</article>
 
 				{this.state.images.map((item,i)=>{
 					return(
@@ -140,46 +91,15 @@ class App extends Component {
 					)
 				})}
 
-				<div className='fly-sun-sm'>
-					<img src='./assets/images/smail.gif'/>
-				</div>
-
 				<div className='fly-box-btn'>
 					<Button text='点击礼盒' click={false}  className='vertical-btn'></Button>
 				</div>
 
+				<ShareCard></ShareCard>
 
-				<div className="fly-dialog" ref='fly-dialog'>
-					<img src='./assets/images/dialog.png'/>
-					<Button countX={24} text='制作我的月亮信笺' className="horizontal-btn my-moon-letterhead" callBack={this.entryDrawPannel.bind(this)}></Button>	
-				</div>
-
-				<DrawScene></DrawScene>
 
 				<Star {...starProps}></Star>
 
-				<div className='fly-mask' ref='fly-mask'>
-					<div className='fly-loading-C'>
-						<img src='./assets/images/loading.png'/>
-						<img src='./assets/images/loading-cloud.png'/>
-						
-					</div>
-					<div className='loading-text'>
-							loading...<span className='process' ref='progress'>0%</span>
-					</div>
-				</div>
-
-
-				{/*
-				<Button callBack={this.reDraw}></Button>
-
-				<div style={{height:30}}></div>
-
-				<Button text='确定' callBack={this.ok}></Button>
-
-				<div style={{height:30}}></div>
-				
-				<Button text='分享'  className='vertical-btn' callBack={this.ok}></Button>		*/}		
 			</div>
 
 		);
@@ -194,11 +114,12 @@ class App extends Component {
 		if(e.target.parentNode.classList.contains('fly-box')){
 			clearTimeout(this.entryTime);
 			e.target.src='./assets/images/boxopen.png';
-			this.refs['main'].querySelector('.fly-sun-sm').classList.add('active');
-			setTimeout(()=>{
-				this.refs['fly-dialog'].classList.add('active');
-				this.setState({shadow:true});//
-			},8*1000);
+			this.setState({shadow:true});//
+			let cardC = document.querySelector('.fly-card-C');
+			cardC.classList.add('active');
+			cardC.addEventListener('webkitTransitionEnd',function(){
+				this.classList.add('big');
+			});
 		}
 	}
 
@@ -219,39 +140,17 @@ class App extends Component {
 		this.showShine();
 		let main = this.refs['main'];
 		this.main=  main;
-		
+		setTimeout(()=>{
+			main.classList.add('active');
+			this.float(this); 
+		},1000);
 
 		main.querySelector('.fly-rabbit-r').addEventListener('webkitTransitionEnd',()=>{
 			setTimeout(()=>{
 				main.querySelector('.fly-rabbit-r img').src ='./assets/images/rabbit-l.png';
 			},500);
 		});
-		window.float = this.float;
-
-		let progress = this.refs['progress']
-
-		utilMethods.loading(this.state.loadingImgs,(p)=>{
-			progress.innerHTML = Math.round(p * 100)+"%"; 
-		},()=>{
-			this.refs['fly-mask'].style.display = 'none';
-			this.init();
-		});
 		
-	}
-
-	init(){
-		let main = this.refs['main'];
-		main.classList.add('active');
-		this.float(this);
-		this.entryTime = setTimeout(()=>{
-			main.querySelector('.fly-sun-sm').classList.add('active');
-			main.querySelector('.fly-box img').src='./assets/images/boxopen.png';
-			setTimeout(()=>{
-				this.refs['fly-dialog'].classList.add('active');
-				this.setState({shadow:true});//
-			},8*1000);
-		},8000);
-
 	}
 
 	float(_this){
@@ -359,31 +258,3 @@ class App extends Component {
 
 ReactDOM.render(<App></App>,document.getElementById('fly-main'));
 
-
-
-/*
-
-data.canvas.addEventListener("touchstart",e=>{
-	var e = e.targetTouches[0];
-	moon.beginDraw();
-	moon.draw(e.pageX,e.pageY);
-	isCanDraw = true;
-
-});
-document.addEventListener('touchmove',e=>{
-	e.preventDefault();
-	if(isCanDraw){
-		var e = e.targetTouches[0];
-		moon.draw(e.pageX,e.pageY);	
-		console.log(moon.pointArr.length)
-	}
-	return 0;
-});
-document.addEventListener('touchend',e=>{
-	isCanDraw =false;
-
-});
-
-document.getElementById('clear').addEventListener('touchstart',()=>{
-	moon.clear();
-});*/

@@ -1,7 +1,8 @@
 
 module.exports = {
 	entry:{
-		index:"./index.jsx"
+		index:"./index.jsx",
+		share:"./share.jsx"
 	},
 	output:{
 		filename:'[name].js',
