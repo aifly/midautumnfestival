@@ -17,7 +17,7 @@ export default class DriftDown{
 		this.petal.display = 'block';
 		if(this.maxHeight<0){
 			this.petal.style.WebkitTransform='translate3d('+this.startX+'px,'+this.startY+'px,0) scale('+(1-startY/this.maxHeight)+')';	
-			this.petal.style.WebkitFilter = 'blur('+(startY/this.maxHeight*6)+'px)';
+			//this.petal.style.WebkitFilter = 'blur('+(startY/this.maxHeight*6)+'px)';
 		}
 		else{
 			this.petal.style.WebkitTransform='translate3d('+this.startX+'px,'+this.startY+'px,0) rotate('+this.rotation+'deg)';

@@ -95,7 +95,7 @@ class App extends Component {
 	render() {
 		let starProps = {
 			width:data.width,
-			height : data.height
+			height : data.height/2
 		}
 
 		let shadowStyle = {
@@ -147,7 +147,6 @@ class App extends Component {
 				<div className='fly-box-btn'>
 					<Button text='点击礼盒' click={false}  className='vertical-btn'></Button>
 				</div>
-
 
 				<div className="fly-dialog" ref='fly-dialog'>
 					<img src='./assets/images/dialog.png'/>
@@ -236,7 +235,7 @@ class App extends Component {
 			this.refs['fly-mask'].style.display = 'none';
 			setTimeout(()=>{
 				this.init();
-			},3000);
+			},3000)
 		});
 		
 	}

@@ -24,7 +24,7 @@ export default class Star extends Component {
 				WebkitAnimationDelay:size*400+'ms',
 				WebkitAnimationDuration:(r+.1)+'s'
 			}
-			if(i % 8 === 0){
+			if(i % 5 === 0){
 				style.opacity =1;
 				style.width =7;
 				style.height =7;
@@ -42,7 +42,7 @@ export default class Star extends Component {
 }
 
 Star.defaultProps = {
-	count : 110,
+	count : 20,
 	width:320,
 	height:568
 }
