@@ -152,6 +152,12 @@ body{
   color:$baseColor;
 }
 #fly-main{
+  @include pos(a);
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 .fly-meteor-C{
    width: 3rem;
@@ -163,7 +169,6 @@ body{
 }
 .meteor{
   width: 3rem;
-
 }
 
 .fly-meteor-C1{

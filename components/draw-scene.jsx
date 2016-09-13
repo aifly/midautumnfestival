@@ -76,13 +76,21 @@ export default class DrawScene extends Component {
 	}
 
 	clearWish(){//清空祝福语
-		this.refs['fly-wish-author'].value = '';
+		this.setState({
+			wishContent:'',
+			wishAuthor:''
+		});
 		this.refs['fly-wish-content'].value = '';
+		this.refs['fly-wish-author'].value = '';
 	}
 
 	prepareShare(){//点击确定准备开始跳转到分享的页面去。
-		this.refs['fly-wish-words'].innerHTML = this.refs['fly-wish-content'].value;
-		this.refs['fly-wish-name'].innerHTML = this.refs['fly-wish-author'].value;
+		this.setState({
+			wishContent:this.refs['fly-wish-content'].value,
+			wishAuthor:this.refs['fly-wish-author'].value
+		});
+		//this.refs['fly-wish-words'].innerHTML = this.refs['fly-wish-content'].value;
+		//this.refs['fly-wish-name'].innerHTML = this.refs['fly-wish-author'].value;
 		let card=this.refs['fly-card-C'];
 		card.style.WebkitTransform = 'scale(.1)';
 		card.style.WebkitTransformOrigin = 'top';
@@ -102,6 +110,8 @@ export default class DrawScene extends Component {
 					content:encodeURI(this.state.wishContent),
 					author:encodeURI(this.state.wishAuthor)
 				}
+				
+				
  				let json = encodeURI(JSON.stringify(data));
 				window.location.href='./share.html?data='+json;
 			},4000);

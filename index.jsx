@@ -234,7 +234,9 @@ class App extends Component {
 			progress.innerHTML = Math.round(p * 100)+"%"; 
 		},()=>{
 			this.refs['fly-mask'].style.display = 'none';
-			this.init();
+			setTimeout(()=>{
+				this.init();
+			},3000);
 		});
 		
 	}

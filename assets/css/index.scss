@@ -152,7 +152,12 @@ body{
   color:$baseColor;
 }
 #fly-main{
-
+  @include pos(a);
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
   .fly-mask{
     width:100%;
     height: 100%;
@@ -353,6 +358,11 @@ body{
 
 .fly-main-C{
   overflow: hidden;
+  width: 100%;
+  height: 100%;
+  @include pos(a);
+  left: 0;
+  top: 0;
   &.drawscene{
     @include public();
       .fly-box{

@@ -42,9 +42,7 @@
     font-size: .5rem; }
   .fly-draw-scene.hide .fly-btn-C {
     -webkit-transition: -webkit-transform 0.5s;
-    transition: -webkit-transform 0.5s;
     transition: transform 0.5s;
-    transition: transform 0.5s, -webkit-transform 0.5s;
     -webkit-transition-timing-function: cubic-bezier(0, 0.9, 0.17, 1.01);
     transition-timing-function: cubic-bezier(0, 0.9, 0.17, 1.01);
     -webkit-transform: translate3d(0, 20rem, 0);
@@ -62,9 +60,7 @@
   .fly-draw-scene.hide .fly-card-C {
     opacity: 1;
     -webkit-transition: -webkit-transform 2s 1s;
-    transition: -webkit-transform 2s 1s;
     transition: transform 2s 1s;
-    transition: transform 2s 1s, -webkit-transform 2s 1s;
     left: 0;
     color: #893c0e;
     top: 1rem; }
