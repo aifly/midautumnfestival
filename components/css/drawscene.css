@@ -6,7 +6,94 @@
   .fly-draw-scene header {
     text-align: center;
     font-size: .5rem; }
+  .fly-draw-scene.hide .fly-btn-C {
+    -webkit-transition: -webkit-transform 0.5s;
+    transition: -webkit-transform 0.5s;
+    transition: transform 0.5s;
+    transition: transform 0.5s, -webkit-transform 0.5s;
+    -webkit-transition-timing-function: cubic-bezier(0, 0.9, 0.17, 1.01);
+    transition-timing-function: cubic-bezier(0, 0.9, 0.17, 1.01);
+    -webkit-transform: translate3d(0, 20rem, 0);
+    transform: translate3d(0, 20rem, 0); }
+  .fly-draw-scene.hide header {
+    opacity: 0;
+    -webkit-transition: 1s opacity;
+    transition: 1s opacity; }
+  .fly-draw-scene.hide .fly-draw-C canvas {
+    display: none; }
+  .fly-draw-scene.hide .fly-draw-C .fly-center-circle {
+    opacity: 0;
+    -webkit-transition: 1s opacity;
+    transition: 1s opacity; }
+  .fly-draw-scene.hide .fly-card-C {
+    opacity: 1;
+    -webkit-transition: -webkit-transform 4s 2s;
+    transition: -webkit-transform 4s 2s;
+    transition: transform 4s 2s;
+    transition: transform 4s 2s, -webkit-transform 4s 2s;
+    left: 0;
+    color: #893c0e;
+    top: 1rem; }
+    .fly-draw-scene.hide .fly-card-C .fly-wish-words {
+      position: absolute;
+      left: 0;
+      line-height: 1rem;
+      top: 4.2rem;
+      width: 64%;
+      left: 18%;
+      color: inherit; }
+    .fly-draw-scene.hide .fly-card-C .fly-wish-name {
+      position: absolute;
+      color: inherit;
+      top: 8.3rem;
+      right: 1.5rem; }
+    .fly-draw-scene.hide .fly-card-C .fly-wish-content {
+      position: absolute;
+      top: 10rem;
+      left: 1.5rem;
+      width: 7rem;
+      background: transparent;
+      height: 1.5rem;
+      z-index: 10;
+      outline: none; }
+    .fly-draw-scene.hide .fly-card-C .fly-wish-author {
+      position: absolute;
+      outline: none;
+      top: 12rem;
+      width: 7rem;
+      left: 1.5rem;
+      background: transparent;
+      border: 1px solid #ccc; }
+    .fly-draw-scene.hide .fly-card-C .fly-wish-btns {
+      position: absolute;
+      top: 13rem;
+      width: 100%;
+      display: -webkit-box;
+      -webkit-box-align: center;
+      -webkit-box-pack: center;
+      -webkit-box-orient: horizontal; }
+      .fly-draw-scene.hide .fly-card-C .fly-wish-btns .fly-button-C {
+        margin: 0 20px;
+        color: #666666; }
+        .fly-draw-scene.hide .fly-card-C .fly-wish-btns .fly-button-C .fly-button-t, .fly-draw-scene.hide .fly-card-C .fly-wish-btns .fly-button-C .fly-button-b {
+          border-color: #666666; }
+        .fly-draw-scene.hide .fly-card-C .fly-wish-btns .fly-button-C .fly-button-b .linex, .fly-draw-scene.hide .fly-card-C .fly-wish-btns .fly-button-C .fly-button-b .liney {
+          border-color: #666666; }
+        .fly-draw-scene.hide .fly-card-C .fly-wish-btns .fly-button-C .fly-button-b .linex {
+          top: 89%; }
+  .fly-draw-scene .fly-card-C {
+    opacity: 0;
+    -webkit-transition: -webkit-transform 4s 2s;
+    transition: -webkit-transform 4s 2s;
+    transition: transform 4s 2s;
+    transition: transform 4s 2s, -webkit-transform 4s 2s;
+    position: absolute;
+    -webkit-transform: translate3d(0, 3rem, 0);
+    transform: translate3d(0, 3rem, 0); }
+    .fly-draw-scene .fly-card-C .fly-face {
+      position: absolute; }
   .fly-draw-scene .fly-draw-C {
+    z-index: 1;
     background: rgba(255, 255, 255, 0.3);
     margin: 10px 0;
     position: relative; }

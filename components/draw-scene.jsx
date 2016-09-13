@@ -5,18 +5,40 @@ import Button from './Button.jsx';
 import $ from 'zeptojs';
 
 export default class DrawScene extends Component {
+	constructor(props) {
+	  super(props);
+	
+	  this.state = {
+	  	 face:'',
+	  	 style:{}
+	  };
+	}
 	render() {
 		return (
-			<div className='fly-draw-scene'>
+			<div className='fly-draw-scene' ref='fly-draw-scene'>
 				<header>开始绘制我的私人订制月亮吧</header>
 				<div className='fly-draw-C' ref='fly-draw-C'>
 					<canvas ref='draw'></canvas>
 					<div className='fly-center-circle'></div>
+					
 				</div>
 				<div className='fly-btn-C'>
 					<Button callBack={this.reDraw.bind(this)} text='重画'></Button>
 					<Button callBack={this.clipImg.bind(this)} text='确定'></Button>
 				</div>
+				<div className='fly-card-C' ref='fly-card-C'>
+					<img src='./assets/images/card.png'/>
+					{this.state.face && <img src={this.state.face} ref='fly-face' className='fly-face' style={this.state.style} />}
+					<p className='fly-wish-words' ref='fly-wish-words'>中秋节 月圆是画，月缺是诗。如诗如画，良辰美景，送给我心爱的你。遥远的星空下，共同仰望同样的美月，是你我心灵的契约！ </p>
+					<p className='fly-wish-name' ref='fly-wish-name'>@某某某</p>
+					<textarea onChange={this.checkWords.bind(this)} ref='fly-wish-content' className='fly-wish-content' placeholder='输入我的祝福语(50字以内)'></textarea>
+					<input ref='fly-wish-author' className='fly-wish-author' placeholder='祝福人'/>
+					<div className='fly-wish-btns' ref='fly-wish-btns'>
+						<Button callBack={this.clearWish.bind(this)}></Button>
+						<Button callBack={this.prepareShare.bind(this)} text='确定'></Button>	
+					</div>
+				</div>
+
 			</div>
 		);
 	}
@@ -27,26 +49,73 @@ export default class DrawScene extends Component {
 		},1)
 	}
 
+	checkWords(e){
+		if(e.target.value.length > 50){
+			e.target.value = e.target.value.substr(0,50);
+		}
+	}
+
+	clearWish(){
+		this.refs['fly-wish-author'].value = '';
+		this.refs['fly-wish-content'].value = '';
+	}
+
+	prepareShare(){//点击确定准备开始跳转到分享的页面去。
+		this.refs['fly-wish-words'].innerHTML = this.refs['fly-wish-content'].value;
+		this.refs['fly-wish-name'].innerHTML = this.refs['fly-wish-author'].value;
+	}
+
 	reDraw(){//重绘
 		this.stage.removeAllChildren();
 		this.stage.update();
 		this.target = null;
 	}
 	clipImg(){//点击确定后，上传并裁剪图片。
-		if(!this.data){
-			return;
+		if(!this.stage.children.length){
+			return false;
 		}
 		this.data.setcontents= this.refs['draw'].toDataURL();
-		console.log(this.data);
-		return;
+		var cacheCanvas = document.createElement('canvas');
+		let size = Math.max(this.data.setimage_w,this.data.setimage_w)
+		cacheCanvas.width = size;
+		cacheCanvas.height = size;
+		this.setState({
+			style:{
+				left:'1.5rem',
+				width:'2rem',
+				height:'2rem'
+			}
+		})
+		var context = cacheCanvas.getContext('2d');
+		context.drawImage(this.refs['draw'],this.data.setimage_x,this.data.setimage_y,size,size,0,0,size,size);
+		this.data.setimage_w = this.data.setimage_h = size;
+		//this.data.setcontents = cacheCanvas.toDataURL();
+
+		
 		let self = this;
+		
+		let rem = document.documentElement.clientWidth/ 10;
 		$.ajax({
 			type:"POST",
 			url:"http://api.zmiti.com/v2/share/base64_image/",
-			data:self.data,
+			data:{
+				setcontents:cacheCanvas.toDataURL()
+			},
 			success(da){
 				if(da.getret === 0 ){//上传正确
-					console.log(da.getimageurl);
+					cacheCanvas = null;
+					self.data = null;
+					
+					self.setState({
+						face:da.getimageurl
+					},()=>{
+						self.refs['fly-face'].onload = function(){
+							this.style.WebkitTransition = '3.6s';
+							//this.style.WebkitTransform = 'translate3d('+(-2)+'rem,0,0)';
+							self.refs['fly-card-C'].style.WebkitTransform = 'translate3d(0,0,0)';
+							self.refs['fly-draw-scene'].classList.add('hide');
+						}
+					})
 				}
 			}
 		})
@@ -63,10 +132,6 @@ export default class DrawScene extends Component {
 			startY = 0,
 			posX = [],
 			posY = [];
-
-
-			
-
 
 		let touchmoveHandler = e=>{
 
@@ -135,12 +200,12 @@ export default class DrawScene extends Component {
 			bitMap.mask = self.shape;
 			self.stage.update();
 		}
-		img.src=  './assets/images/sun-sm.png';
+		img.src=  './assets/images/face1.png';
 	}
 
 	draw(x,y,flag = true,flag1 = false){
 
-		this.target = this.target || this.shape.graphics.setStrokeStyle(3).beginStroke('transparent');
+		this.target = this.target || this.shape.graphics.setStrokeStyle(3).beginStroke('#fff');
 		if(flag){
 			//var target = this.shape.graphics.beginStroke('#fff');
 		}
