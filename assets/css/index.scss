@@ -218,6 +218,8 @@ body{
    width: 3rem;
    left: 20%;
    opacity:0;
+   z-index: -1;
+
   @include pos(a);
   @include transform(translate3d(100%,-100%,0));
   @include animation(meteorMove 5s infinite 2s);
@@ -249,12 +251,12 @@ body{
 
 
 
-@mixin transitionTime($time:6s){
+@mixin transitionTime($time:4s){
   @include transition_transform($time);
 }
 
 .fly-shine{
-   width: 5rem;
+   /* width: 5rem;
    height:3rem;
    @include br(42%);
    @include pos(a);
@@ -268,7 +270,7 @@ body{
    @include transitionTime();
    &.active{
       @include transform(scale(1)); 
-   }
+   } */
 }
 
 .fly-moon{
@@ -284,7 +286,7 @@ body{
 .fly-moon-heart{
    @include pos(a);
    width: 9rem;
-   top: 1.8rem;
+   top: 0rem;
    @include transitionTime();
 }
 
@@ -292,14 +294,13 @@ body{
    width: 8rem;
    @include pos(a);
    left: 3rem;
-   top: 7.8rem;
+   top: 6.8rem;
    p{
     color:#9e4941;
     font-size: .4rem;
     line-height: 24px;
     &:nth-of-type(2){
       text-indent:2em;
-  
     }
    }
 }
@@ -307,21 +308,24 @@ body{
 .fly-window{
   @include pos(a);
   bottom:-5.5rem;
+  z-index: 0;
+
    @include transitionTime();
 }
 
 .fly-women{
   @include pos(a);
   bottom:0;
+  z-index: 10;
   width: 6rem;
   @include transitionTime();
 }
 .fly-rabbit{
   @include pos(a);
   bottom:0;
-  width: 2rem;
+  width: 4rem;
   right: 0;
-
+  z-index: 10;
   @include transitionTime();
 
 }
@@ -337,7 +341,7 @@ body{
       @include transform(translate3d(-10rem,0,0));  
     }
     .fly-rabbit{
-      @include transform(translate3d(3rem,0,0));   
+      @include transform(translate3d(4rem,0,0));   
     }
     
     .fly-shine{
@@ -365,8 +369,9 @@ body{
   top: 0;
   &.drawscene{
     @include public();
+
       .fly-box{
-        @include transition(opacity 2s);
+        @include transition(opacity 1s);
       }
      .fly-window{
          @include transform(translate3d(0,10.5rem,0));
@@ -400,7 +405,7 @@ body{
   &.active{
     @include public();
     .fly-star-C{
-      @include transitionTime(4s);
+      @include transitionTime(2s);
       @include transform(scale(.9));
     }
     .fly-window{
@@ -410,13 +415,15 @@ body{
       opacity:1;
     }
     .fly-box{
-      z-index: 1;
+      z-index: 22;
       opacity:1;
     }
     .fly-rabbit-r,.fly-box-btn{
-      @include transform(translate3d(0,0,0));
       opacity:1;
     }
+    .fly-logo{
+         opacity:1;
+      }
 
     .fly-plum{
          opacity:1;
@@ -435,18 +442,20 @@ body{
   bottom:1.8rem;
   left: $left;
   opacity:0;
+  z-index: 10;
   @include transition(opacity 2s 4s);
 }
 
 .fly-rabbit-r{
-  $width:2rem;
+  $width:2.5rem;
   $left : .7rem;
   width: $width;
+  z-index: 10;
   bottom:3rem;
   left: $left;
   @include pos(a);
-  @include transform(translate3d(-($width + $left + 1,0,0)));
-  @include transition_transform(2.13s 5s linear);
+  opacity:0;
+  @include transition(2.13s 5s linear opacity);
   &.hide{
     @include transform(translate3d(-($width + $left + 1,0,0)));
   }
@@ -482,6 +491,7 @@ body{
    width: 5rem;
    @include pos(a);
    top:10%;
+   z-index: 11;
    @include transition(opacity 3s 4s);
    opacity:0;
 }
@@ -489,6 +499,8 @@ body{
     width: .5rem;
    @include pos(a);
    top:25%;
+   z-index: 10;
+
    left:5%;
    @include transition(opacity 3s 4s);
    opacity:0;
@@ -515,38 +527,54 @@ body{
     bottom:0;
     left: 20%;
     opacity:0;
+    z-index: -1;
 }
 
 .fly-sun-sm{
-  width: 4rem;
-  height: 4rem;
+  width: 10rem;
+  height: 2rem;
   text-align: center;
   @include pos(a);
-  bottom:5.5rem;
-  right: .7rem;
+  bottom:6.5rem;
+  right: .6rem;
   z-index: -1;
   opacity:0;
   &.active{
-    z-index: 1;
+    z-index: 24;
     opacity:1;
     @include transform(translate3d(0,-7rem,0));
     -webkit-transition:-webkit-transform 5s 3s linear,opacity 3s  linear;
   }
-  img{
-    width: 60%;
-    margin-top: 1.2rem;
+  img.smail{
+    width: 3rem;
+    @include pos(a);
+    z-index: 21;
+    right:1rem;
+
   }
 }
 
 .fly-house{
   @include pos(a);
   bottom:0;
+  z-index: -1;
+}
+
+.fly-logo{
+  width: 2rem;
+  @include pos(a);
+  bottom:1rem;
+  z-index: 10;
+  left: 1rem;
+  opacity:0;
+  @include transition(1s opacity 2s);
 
 }
 
 .fly-dialog{
   @include pos(a);
   display: none;
+  z-index: 20;
   &.none{
     display: none;
   }
@@ -559,7 +587,7 @@ body{
     opacity:0;
     @include transition(opacity 1s .5s);
   }
-  top: 25%;
+  top: 115%;
   width: 90%;
   .my-moon-letterhead{
      @include pos(a);
@@ -623,4 +651,27 @@ body{
     @include transform(translate3d(-50%,30%,0));
     opacity:1;
   }
+}
+
+.fly-team{
+  @include pos(a);
+  width: .8rem;
+  font-size: .5rem;
+  color:#fff;
+  border:1px solid #fff;
+  text-align: center;
+  line-height: 24px;
+  @include br(5px);
+  right:10px;;
+  bottom:10px;
+  z-index: 100;
+}
+
+.fly-team-img{
+  @include pos(f);
+  left:0;
+  top:0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
 }

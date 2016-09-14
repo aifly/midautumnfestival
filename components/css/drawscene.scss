@@ -115,16 +115,20 @@
 
 .fly-draw-scene{
     width: 10rem;
-    @include pos(a);
+    @include pos(f);
     left: 0;
     top: 1rem;
-
+    z-index: 20;
     &.active{
       display: block;
     }
+
+    textarea{
+      font-size:.45rem;
+    }
     .fly-text-img{
        @include pos(a);
-       left: 1rem;
+       left: 2rem;
        top: 0;
        opacity:0;
        z-index: -1;
@@ -132,7 +136,7 @@
        &.active{
           opacity:1;
        }
-       width: 8rem;
+       width: 6rem;
     }
     .fly-share-rabbit{
        width: 2.5rem;
@@ -186,7 +190,7 @@
 
        .fly-card-C{
           opacity:1;  
-          @include transition_transform(2s 1s);
+          @include transition_transform(2s);
           left: 0;
           color:#893c0e;
           top:1rem;
@@ -199,6 +203,59 @@
              left: 18%;
              color:inherit;
              font-size:.4rem;
+             
+          }
+
+          .fly-edit-C{
+              @include pos(f);
+              top:0;
+              left:0;
+              width: 100%;
+              height: 100vh;
+              z-index: 100;
+              
+              background:rgba(0,0,0,.5);
+              textarea{
+                width: 100%;
+                height: 2rem;
+              } 
+              section{
+                 height: 4rem;
+                 background:#fff;
+              }
+            .fly-button-C{
+                margin:0 auto;
+             }
+             .fly-button-b,.fly-button-t{
+                 color: #666;
+                 span{
+                 }
+                 border-color:#666666;
+                 .linex,.liney{border-color:#666666;}
+             }            
+          }
+          .fly-edit-wish{
+            @include pos(a);
+            top:10rem;
+             color:inherit;
+             width: 100%;
+             section{
+              .fly-button-b,.fly-button-t{
+                 span{
+                  font-size: .4rem;
+                 }
+                   
+               }
+             }
+             .fly-button-C{
+                margin:0 auto;
+             }
+             .fly-button-b,.fly-button-t{
+                 color: #666;
+                 
+                 border-color:#666666;
+                 .linex,.liney{border-color:#666666;}
+             }
           }
           .fly-wish-name{
             @include pos(a);
@@ -255,13 +312,17 @@
 
     .fly-card-C{
       opacity:0;
-      @include transition(2s 2s);
+      @include transition(2s 1s);
       @include pos(a);
       @include transform(translate3d(0,3rem,0));
       .fly-face{
         @include pos(a);
+        top: 0;
       }
     }
+    
+
+
     .fly-draw-C{
       z-index: 1;
       background:rgba(255,255,255,.3);

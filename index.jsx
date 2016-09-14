@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 import Button from './components/Button.jsx';
-import Star from './components/star.jsx';
+/*import Star from './components/star.jsx';*/
 
 import DriftDown from './libs/driftdown';
 import DrawScene from './components/draw-scene.jsx';
@@ -39,23 +39,26 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 	  this.state = {
+	  	indexShow : true,
+	  	smailShow:false,
+	  	loadingShow:true,
+	  	textShow:true,
+	  	moonShow:true,
+	  	dialogShow:false,
+	  	DrawSceneShow:false,
+	  	windowShow:true,
+	  	boxShow:true,
+	  	laternPlumShow:true,
+	  	rabbitShow:true,
 	  	shadow:false,
+		showTeam:false,
+		progress:0,
+		imgShow:false,
+		showTeamBtn:false,
 	  	 images:[
 	  	 	'moon-heart',
-	  	 	'latern',
-	  	 	'latern',
-	  	 	'latern',
-	  	 	'plum',
-	  	 	'house',
-	  	 	'window',
 	  	 	'rabbit',
-	  	 	'rabbit-r',
-	  	 	'women',
-	  	 	'box',
-	  	 	'petal',
-	  	 	'petal',
-	  	 	'petal',
-
+	  	 	'women'
 	  	 ],
 	  	 loadingImgs:[
 	  	 	'./assets/images/300.jpg',
@@ -67,22 +70,15 @@ class App extends Component {
 	  	 	'./assets/images/face3.png',
 	  	 	'./assets/images/face4.png',
 	  	 	'./assets/images/face5.png',
-	  	 	'./assets/images/finger.png',
-	  	 	'./assets/images/house.png',
-	  	 	'./assets/images/latern.png',
-	  	 	'./assets/images/logo.png',
-	  	 	'./assets/images/meteor.png',
+	  	 	//'./assets/images/finger.png',
+	  	 	//'./assets/images/logo.png',
 	  	 	'./assets/images/moon.png',
 	  	 	'./assets/images/moon-heart.png',
-	  	 	'./assets/images/petal.png',
-	  	 	'./assets/images/plum.png',
-	  	 	'./assets/images/rabbit.png',
 	  	 	'./assets/images/rabbit-r.png',
 	  	 	'./assets/images/rabbit-l.png',
 	  	 	'./assets/images/shadow.png',
 	  	 	'./assets/images/share-btn.png',
 	  	 	'./assets/images/smail.gif',
-	  	 	'./assets/images/sun-sm.png',
 	  	 	'./assets/images/sun-sm.png',
 	  	 	'./assets/images/text.png',
 	  	 	'./assets/images/window.png',
@@ -107,67 +103,83 @@ class App extends Component {
 		return (
 			<div ref='main' className='fly-main-C ' onTouchTap={this.showBox}>
 				<div className='fly-shadow' style={shadowStyle}></div>
-				<div className='fly-meteor-C'>
+				{/*<div className='fly-meteor-C'>
 					<img src='./assets/images/meteor.png' className='meteor'/>
 				</div>
 				<div className='fly-meteor-C fly-meteor-C1'>
 					<img src='./assets/images/meteor.png' className='meteor'/>
-				</div>
+				</div>*/}
 
-				<div className='fly-meteor-C fly-meteor-C2'>
-					<img src='./assets/images/meteor.png' className='meteor'/>
-				</div>
-				
-				<div className='fly-moon' ref='moon'>
-					<img src='./assets/images/moon.png'/> 
-					<div className='fly-shine'></div>
-					<div className='fly-shine'></div>
-					<div className='fly-shine'></div>
-					<div className='fly-shine'></div>
-				</div>
+				{this.state.moonShow &&<div className='fly-moon' ref='moon'>
+					{this.state.imgShow && <img src='./assets/images/moon.png'/> }
+					{/*<div className='fly-shine'></div>
+										<div className='fly-shine'></div>
+										<div className='fly-shine'></div>
+										<div className='fly-shine'></div>*/}
+				</div>}
 
 				
-				<article className='fly-text'>
-					<p>一轮圆月，温暖有你陪伴的时光；</p>
-					<p>一段心声，跨越咫尺天涯的距离。</p>
-				</article>
+				{this.state.textShow && this.state.imgShow && <article ref='fly-text' className='fly-text'>
+					<p>一轮圆月，温暖有你陪伴的时光</p>
+					<p>一段心声，跨越咫尺天涯的距离</p>
+				</article>}
 
-				{this.state.images.map((item,i)=>{
+				{this.state.indexShow && this.state.images.map((item,i)=>{
 					return(
 						<div key={i}  className={'fly-'+item}>
-							<img src={'./assets/images/'+item+'.png'}/>
+							{this.state.imgShow && <img src={'./assets/images/'+item+'.png'}/>}
 						</div>
 					)
 				})}
 
-				<div className='fly-sun-sm'>
-					<img src='./assets/images/smail.gif'/>
+				
+
+				{/*<div className='fly-logo'>
+					{this.state.imgShow && <img src={'./assets/images/logo.png'}/>}
 				</div>
 
-				<div className='fly-box-btn'>
-					<Button text='点击礼盒' click={false}  className='vertical-btn'></Button>
-				</div>
+				<div className='fly-plum'>
+					{this.state.imgShow && <img src={'./assets/images/plum.png'}/>}
+				</div>*/}
 
-				<div className="fly-dialog" ref='fly-dialog'>
-					<img src='./assets/images/dialog.png'/>
-					<Button countX={24} text='制作我的月亮信笺' className="horizontal-btn my-moon-letterhead" callBack={this.entryDrawPannel.bind(this)}></Button>	
-				</div>
+				{this.state.rabbitShow && <div className='fly-rabbit-r'>
+					{this.state.imgShow && <img src={'./assets/images/anniu.png'}/>}
+				</div>}
 
-				<DrawScene></DrawScene>
+				{this.state.windowShow&&<div className='fly-window'>
+					{this.state.imgShow && <img src={'./assets/images/window.png'}/>}
+				</div>}
 
-				<Star {...starProps}></Star>
+				{this.state.boxShow&&<div className='fly-box'>
+					{this.state.imgShow && <img src={'./assets/images/box.png'}/>}
+				</div>}
 
-				<div className='fly-mask' ref='fly-mask'>
+				{this.state.smailShow && <div className='fly-sun-sm ' ref='fly-sun-sm'>
+					{this.state.imgShow && <img src='./assets/images/smail.gif' className='smail'/>}
+				{/*this.state.dialogShow||*/}
+					{this.state.dialogShow && <div className="fly-dialog " ref='fly-dialog'>
+						{this.state.imgShow && <img src='./assets/images/dialog.png'/>}
+						<Button countX={24} text='制作我的月亮信笺' className="horizontal-btn my-moon-letterhead" callBack={this.entryDrawPannel.bind(this)}></Button>	
+					</div>}
+				</div>}
+
+				
+
+				<audio autoPlay loop src='./assets/images/bg.mp3'></audio>
+ 
+				{this.state.DrawSceneShow  && <DrawScene imgShow={this.state.imgShow } className='active'></DrawScene>}
+ 
+				{this.state.loadingShow && <div className='fly-mask' ref='fly-mask'>
 					<div className='fly-loading-C'>
 						<img src='./assets/images/loading.png'/>
 						<img src='./assets/images/loading-cloud.png'/>
-						
 					</div>
 					<div className='loading-text'>
-							loading...<span className='process' ref='progress'>0%</span>
+						loading...<span className='process' ref='progress'>{this.state.progress}%</span>
 					</div>
-				</div>
+				</div>}
 
+				
 
 				{/*
 				<Button callBack={this.reDraw}></Button>
@@ -184,20 +196,19 @@ class App extends Component {
 		);
 	}
 
+
 	showBox(e){//打开盒子
+
 		this.isShowBox = this.isShowBox || 1;
 		if(this.getStyle(e.target.parentNode,'opacity')<=.5 || this.isShowBox === 2){
 			return;
 		}
-		this.isShowBox = 2;
 		if(e.target.parentNode.classList.contains('fly-box')){
-			clearTimeout(this.entryTime);
+			this.isShowBox = 2;
+			//clearTimeout(this.entryTime);
 			e.target.src='./assets/images/boxopen.png';
 			this.refs['main'].querySelector('.fly-sun-sm').classList.add('active');
-			setTimeout(()=>{
-				this.refs['fly-dialog'].classList.add('active');
-				this.setState({shadow:true});//
-			},8*1000);
+			this.setState({shadow:true});
 		}
 	}
 
@@ -215,96 +226,92 @@ class App extends Component {
 	}
 	 
 	componentDidMount() {
-		this.showShine();
+		///this.showShine();
 		let main = this.refs['main'];
 		this.main=  main;
-		
 
-		main.querySelector('.fly-rabbit-r').addEventListener('webkitTransitionEnd',()=>{
-			setTimeout(()=>{
-				main.querySelector('.fly-rabbit-r img').src ='./assets/images/rabbit-l.png';
-			},500);
-		});
+		
 		window.float = this.float;
 
 		let progress = this.refs['progress']
 
 		utilMethods.loading(this.state.loadingImgs,(p)=>{
-			progress.innerHTML = Math.round(p * 100)+"%"; 
+			this.setState({
+				progress:Math.round(p * 100)
+			})
+
 		},()=>{
-			this.refs['fly-mask'].style.display = 'none';
-			setTimeout(()=>{
+
+			this.setState({
+				loadingShow:false,
+				imgShow:true
+			});
+
+			let startX=0,
+			startY = 0;
+
+			var t = setTimeout(()=>{
 				this.init();
-			},3000)
+			},5000);
+
+			this.use = 1;
+			document.addEventListener('touchstart',e=>{
+				if(this.use === 1){
+					var e = e.changedTouches[0];
+					startY = e.pageY;
+				}
+			});
+			document.addEventListener('touchend',e=>{
+				if(this.use === 1){
+					this.use = 2;
+					var e = e.changedTouches[0];
+					if(Math.abs(e.pageY - startY )> 50){
+						clearTimeout(t);
+						this.init();
+
+					}
+				}
+			});
+			 
 		});
+
 		
 	}
 
 	init(){
 		let main = this.refs['main'];
 		main.classList.add('active');
-		this.float(this);
-		this.entryTime = setTimeout(()=>{
-			main.querySelector('.fly-sun-sm').classList.add('active');
-			main.querySelector('.fly-box img').src='./assets/images/boxopen.png';
-			setTimeout(()=>{
+		//this.float(this);
+		this.setState({
+			smailShow:true
+		});
+
+		this.refs['fly-text'].addEventListener('webkitTransitionEnd',()=>{
+			this.setState({
+				indexShow:false,
+				dialogShow:true,
+				textShow:false,
+				moonShow:false
+			});
+			
+			//this.refs['fly-dialog'].classList.add('active');
+		});
+
+		this.refs['fly-sun-sm'].addEventListener('webkitTransitionEnd',(e)=>{
+			if(e.propertyName.indexOf('transform')>-1){
 				this.refs['fly-dialog'].classList.add('active');
-				this.setState({shadow:true});//
-			},8*1000);
-		},8000);
+				this.setState({
+					rabbitShow:false
+				})
+			}
+		});
+
 
 	}
 
 	float(_this){
 
-		let main = document.querySelector('.fly-main-C');
-
-		let petals =main.querySelectorAll('.fly-petal'),
-			latern =  main.querySelectorAll('.fly-latern'),
-			plun = main.querySelector('.fly-plum'),
-			petalArr = [];
-			this.petalArr= petalArr;
-			//plun.style.opacity =1;
-		for(var i =0 ;i<petals.length;i++){
-			//petals[i].style.opacity =1;
-			let petal = new DriftDown({
-				petal:petals[i],
-
-			});
-			petalArr.push(petal);
-		}
-		
-		for(var i =0 ;i<latern.length;i++){
-			latern[i].style.opacity =1;
-			let petal = new DriftDown({
-				petal:latern[i],
-				up:true,
-				maxHeight:-750
-			});
-			petalArr.push(petal);
-		}
-		
-		var m = Math;
-
-		this.timer = setInterval(()=>{
-
-			petalArr.forEach((petal)=>{
-				petal.angle+=(petal.speed);
-				petal.angle>=360 && (petal.angle = 0);
-				m.abs(petal.startY) > m.abs(petal.maxHeight) &&(petal.startY = 0,petal.angle =0,petal.speedY = Math.random()+.5,petal.startX = 0,petal.rotation = Math.random()*180);
-				petal.startX += m.sin(petal.angle/180*m.PI)/2;
-
-				if(petal.up){
-					petal.startY-=petal.speedY/2;
-					petal.startX += m.sin(petal.angle/180*m.PI)/2*m.random();
-				}
-				else{
-					petal.startY+=petal.speedY;
-				}
-				
-				petal.startMove(petal.startX,petal.startY);
-			});
-		},1000/60);
+ 
 	}
 
 	showShine(){
@@ -320,30 +327,33 @@ class App extends Component {
 		this.main.classList.remove('active');
 		this.main.classList.add('drawscene');
 		
-		this.petalArr.forEach((petal)=>{
-			petal.stop();
-		});
-
 		this.timer && clearInterval(this.timer);
+		
+		this.refs['fly-dialog'].classList.add('hide');
 
-		let dialog =this.main.querySelector('.fly-dialog');
-		dialog.classList.add('hide');
-		dialog.addEventListener('webkitTransitionEnd',()=>{
-			dialog.classList.add('none');
-			this.main.querySelector('.fly-sun-sm').classList.remove('active');
-			document.querySelector('.fly-draw-scene').classList.add('active');
-		});
-		this.plumOut();
+		this.refs['fly-dialog'].addEventListener('webkitTransitionEnd',()=>{
+
+			this.setState({
+				smailShow:false,
+				dialogShow:false,
+				DrawSceneShow:true,
+				laternPlumShow:false,
+				rabbitShow:false,
+				indexShow:false,
+				showTeamBtn:true
+			});
+
+		});  
 	}
 
 	rabbitOut(){
-		this.main.querySelector('.fly-rabbit-r').classList.add('hide');
-		this.main.querySelector('.fly-box-btn').classList.add('hide');
+		//this.main.querySelector('.fly-rabbit-r').classList.add('hide');
+		
 
 	}
 
 	plumOut(){
-		this.main.querySelector('.fly-plum').style.opacity=0;
+		/*this.main.querySelector('.fly-plum').style.opacity=0;
 		let petal= this.main.querySelectorAll('.fly-petal');
 		let latern= this.main.querySelectorAll('.fly-latern');
 		petal[0].style.opacity=0;
@@ -351,7 +361,7 @@ class App extends Component {
 		petal[2].style.opacity=0;
 		latern[0].style.opacity=0;
 		latern[1].style.opacity=0;
-		latern[2].style.opacity=0;
+		latern[2].style.opacity=0;*/
 		
 	}
 	

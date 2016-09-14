@@ -130,7 +130,7 @@
         width: 105%;
         height: 106%;
         @include transform(translate3d(3px,6px,0));
-        box-shadow: 0 0 1rem rgba(255,255,255,.7),0 0 1rem rgba(255,255,255,.4) inset;
+       // box-shadow: 0 0 1rem rgba(255,255,255,.7),0 0 1rem rgba(255,255,255,.4) inset;
      }
     .fly-button-b{
         opacity:0;
@@ -190,7 +190,7 @@
           width: 105%;
           height: 106%;
           @include transform(translate3d(-6px,4px,0));
-          box-shadow: 0 0 1rem rgba(255,0,0,.7),0 0 1rem rgba(255,0,0,.4) inset;
+         // box-shadow: 0 0 1rem rgba(255,0,0,.7),0 0 1rem rgba(255,0,0,.4) inset;
        }
       .fly-button-b{
           opacity:0;

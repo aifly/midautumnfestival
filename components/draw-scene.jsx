@@ -9,43 +9,104 @@ export default class DrawScene extends Component {
 	  super(props);
 	
 	  this.state = {
+	  	 cardShow:false,
+	  	 current:0,
+	  	 showTeam:false,
+	  	 isNext:false,
+	  	 isEdit:true,
+	  	 placeholder:'请输入我的祝福语(50字以内)',
 	  	 face:'',
 	  	 style:{},
-	  	 wishContent:'中秋节 月圆是画，月缺是诗。如诗如画，良辰美景，送给我心爱的你。遥远的星空下，共同仰望同样的美月，是你我心灵的契约！ ',
-	  	 wishAuthor:'某某某'
+	  	 wishContent:'中秋节，月圆是画，月缺是诗。如诗如画，良辰美景，送给我心爱的你。遥远的星空下，共同仰望同样的美月，是你我心灵的契约！ ',
+	  	 wishAuthor:'某某某',
+	  	 textClass:''
 	  };
 	}
 	render() {
+		let imgShow =this.props.imgShow;
 		return (
-			<div className='fly-draw-scene ' ref='fly-draw-scene'>
-				<img src='./assets/images/text.png' className='fly-text-img' ref='fly-text-img'/>
-				<img src='./assets/images/share-btn.png' className='fly-share-rabbit' ref='fly-share-rabbit'/>
-				<img src='./assets/images/logo.png' className='fly-logo' ref='fly-logo'/>
-				<header>开始绘制我的私人订制月亮吧</header>
-				<div className='fly-draw-C' ref='fly-draw-C'>
-					<canvas ref='draw'></canvas>
-					<div className='fly-center-circle'></div>
-					
-				</div>
-				<div className='fly-btn-C'>
-					<Button callBack={this.reDraw.bind(this)} text='重画'></Button>
-					<Button callBack={this.clipImg.bind(this)} text='确定'></Button>
-				</div>
-				<div className='fly-card-C' ref='fly-card-C'>
-					<img src='./assets/images/card.png'/>
+			<div className={'fly-draw-scene '+ this.props.className} ref='fly-draw-scene'>
+					{imgShow && <img src='./assets/images/text.png' className={'fly-text-img '+ this.state.textClass} ref='fly-text-img'/>}
+				{!this.state.cardShow && <div>
+					<header>开始绘制我的私人订制月亮吧</header>
+					<div className='fly-draw-C' ref='fly-draw-C'>
+						<canvas ref='draw'></canvas>
+						<div className='fly-center-circle'></div>
+						
+					</div>
+					<div className='fly-btn-C'>
+						<Button callBack={this.reDraw.bind(this)} text='重画'></Button>
+						<Button callBack={this.clipImg.bind(this)} text='确定'></Button>
+					</div>
+				</div>}
+				{this.state.cardShow && <div className='fly-card-C' ref='fly-card-C'>
+					{imgShow && <img src='./assets/images/card.png'/>}
 					{this.state.face && <img src={this.state.face} ref='fly-face' className='fly-face' style={this.state.style} />}
 					<p className='fly-wish-words' ref='fly-wish-words'>{this.state.wishContent}</p>
-					<p className='fly-wish-name' ref='fly-wish-name'>@{this.state.wishAuthor}</p>
-					<textarea onFocus={this.wishContentfocus.bind(this)} onBlur={this.wishContentblur.bind(this)} onChange={this.checkWords.bind(this)} ref='fly-wish-content' className='fly-wish-content' placeholder='输入我的祝福语(50字以内)' defaultValue={this.state.wishContent}></textarea>
-					<textarea onChange={()=>{}} ref='fly-wish-author' className='fly-wish-author' onFocus={this.wishContentfocus.bind(this)} onBlur={this.wishContentblur.bind(this)}  placeholder='祝福人' defaultValue={this.state.wishAuthor}></textarea>
-					<div className='fly-wish-btns' ref='fly-wish-btns'>
+					<p className='fly-wish-name' ref='fly-wish-name'>{this.state.wishAuthor}</p>
+					<div className='fly-edit-wish'>
+						<section>{this.state.isEdit&& <Button callBack={this.editMyWish.bind(this)}  text='编写我的祝福语'></Button>}</section>
+						{this.state.isNext&& <Button callBack={this.next.bind(this)} text='下一步' ></Button>}
+					</div>
+					{this.state.showNext && <div className='fly-wish-btns' ref='fly-wish-btns'>
 						<Button callBack={this.clearWish.bind(this)}></Button>
 						<Button callBack={this.prepareShare.bind(this)} text='确定'></Button>	
-					</div>
+					</div>}
+					{this.state.current&&<div className='fly-edit-C'>
+						<section>
+							<textarea ref='fly-wish-text' placeholder={this.state.placeholder}></textarea>
+							<Button text='确定' callBack={this.updateWish.bind(this)}></Button>
+						</section>
+					</div>}
 				</div>
+			}
 
 			</div>
 		);
+	}
+
+
+	showTeam(){
+		this.setState({
+			showTeam:true
+		})
+	}
+
+	next(){
+		this.setState({
+			current:2,
+			isNext:false,
+			placeholder:'请输入祝福者'
+		});
+	}
+
+	updateWish(e){
+		//console.log(e.nativeEvent.target.parentNode.querySelector('span'))
+		if(this.state.current === 1){
+			this.setState({
+				wishContent:this.refs['fly-wish-text'].value,
+				isEdit:false,
+				current:0,
+				isNext:true
+			});	
+		}
+		else if(this.state.current === 2){
+			this.setState({
+				wishAuthor:this.refs['fly-wish-text'].value,
+				isEdit:false,
+				current:0,
+				isNext:false,
+				showNext:true
+			});	
+		}
+		
+	}
+
+	editMyWish(){//填写我的祝福语
+		this.setState({
+			current:1,
+			placeholder:'请输入我的祝福语(50字以内)'
+		});
 	}
 	componentDidMount() {
 		 
@@ -59,7 +120,8 @@ export default class DrawScene extends Component {
 		//document.getElementById('fly-main').style.WebkitTransform='translate3d(0,0,0)';
 		let isName =e.target.classList.contains('fly-wish-author');
 		//document.getElementById('fly-main').style.WebkitTransform='translate3d(0,'+(isName?'-8.7rem':'-7.7rem')+',0)'
-		e.target.style.WebkitTransform =  'translate3d(0,'+(isName?'-7rem':'-6rem')+',0)';
+		e.target.style.WebkitTransform =  'translate3d(0,'+(isName ? '-7.7rem' : '-6rem')+',0)';
+		//e.target.position = 'fixed';
 		e.target.style.background =  '#fff';
 
 	}
@@ -78,17 +140,15 @@ export default class DrawScene extends Component {
 	clearWish(){//清空祝福语
 		this.setState({
 			wishContent:'',
-			wishAuthor:''
+			wishAuthor:'',
+			 current:0,
+		  	 isNext:false,
+		  	 isEdit:true,
 		});
-		this.refs['fly-wish-content'].value = '';
-		this.refs['fly-wish-author'].value = '';
+		
 	}
 
 	prepareShare(){//点击确定准备开始跳转到分享的页面去。
-		this.setState({
-			wishContent:this.refs['fly-wish-content'].value,
-			wishAuthor:this.refs['fly-wish-author'].value
-		});
 		//this.refs['fly-wish-words'].innerHTML = this.refs['fly-wish-content'].value;
 		//this.refs['fly-wish-name'].innerHTML = this.refs['fly-wish-author'].value;
 		let card=this.refs['fly-card-C'];
@@ -96,7 +156,9 @@ export default class DrawScene extends Component {
 		card.style.WebkitTransformOrigin = 'top';
 		let doc = document;
 		doc.querySelector('.fly-window').classList.add('active');
-		doc.querySelector('.fly-box').classList.add('active');
+		let box = doc.querySelector('.fly-box');
+		box.classList.add('active');
+		box.style.WebkitTransitionDelay = '4s';
 		
 		setTimeout(()=>{
 			doc.querySelector('.fly-box img').src='./assets/images/boxopen.png';			
@@ -105,22 +167,25 @@ export default class DrawScene extends Component {
 			card.style.opacity = 0;
 			setTimeout(()=>{
 				doc.querySelector('.fly-box img').src='./assets/images/box.png';
-				let data ={
-					img:this.state.face,
-					content:encodeURI(this.state.wishContent),
-					author:encodeURI(this.state.wishAuthor)
-				}
 				
-				
- 				let json = encodeURI(JSON.stringify(data));
-				window.location.href='./share.html?data='+json;
+				setTimeout(()=>{
+					let data ={
+						img:this.state.face,
+						content:encodeURI(this.state.wishContent),
+						author:encodeURI(this.state.wishAuthor)
+					}
+	 				let json = encodeURI(JSON.stringify(data));
+					window.location.href='./share.html?data='+json;
+				},4000)
 			},4000);
 
-			window.float();
-			this.refs['fly-text-img'].classList.add('active');
-			this.refs['fly-share-rabbit'].classList.add('active');
-			this.refs['fly-logo'].classList.add('active');
-		},8*1000);
+			//window.float();
+			
+			this.setState({
+				textClass:'active'
+			});
+
+		},3*1000);
 
 	}
 
@@ -143,7 +208,9 @@ export default class DrawScene extends Component {
 				left:'1.5rem',
 				width:'2rem',
 				height:'2rem'
-			}
+			},
+			cardShow:true
+
 		})
 		var context = cacheCanvas.getContext('2d');
 		context.drawImage(this.refs['draw'],this.data.setimage_x,this.data.setimage_y,size,size,0,0,size,size);
@@ -191,10 +258,10 @@ export default class DrawScene extends Component {
 			startY = 0,
 			posX = [],
 			posY = [];
-
+			let i =0 ;
 		let touchmoveHandler = e=>{
-
-			e.preventDefault();
+			
+			//e.preventDefault();
 			var x = e.changedTouches[0].pageX,
 				y = e.changedTouches[0].pageY-offsetTop;
 				posX.push(x);

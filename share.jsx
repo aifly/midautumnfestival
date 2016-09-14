@@ -38,18 +38,11 @@ class App extends Component {
 		super(props);
 	  this.state = {
 	  	shadow:false,
+	  	showTeam:false,
+	  	indexShow:true,
+	  	shareShow:false,
 	  	 images:[
-	  	 	'latern',
-	  	 	'latern',
-	  	 	'latern',
-	  	 	'plum',
-	  	 	'house',
 	  	 	'window',
-	  	 	'rabbit-r',
-	  	 	'box',
-	  	 	'petal',
-	  	 	'petal',
-	  	 	'petal',
 
 	  	 ]
 	  };
@@ -68,9 +61,9 @@ class App extends Component {
 		}
 
 		return (
-			<div ref='main' className='fly-main-C ' onTouchTap={this.showBox}>
+			<div ref='main' className='fly-main-C ' >
 				<div className='fly-shadow' style={shadowStyle}></div>
-				<div className='fly-meteor-C'>
+				{/*<div className='fly-meteor-C'>
 					<img src='./assets/images/meteor.png' className='meteor'/>
 				</div>
 				<div className='fly-meteor-C fly-meteor-C1'>
@@ -79,11 +72,12 @@ class App extends Component {
 
 				<div className='fly-meteor-C fly-meteor-C2'>
 					<img src='./assets/images/meteor.png' className='meteor'/>
-				</div>
+				</div>*/}
 				
+				<audio autoPlay loop src='./assets/images/bg.mp3'></audio>
 				
 
-				{this.state.images.map((item,i)=>{
+				{this.state.indexShow && this.state.images.map((item,i)=>{
 					return(
 						<div key={i}  className={'fly-'+item}>
 							<img src={'./assets/images/'+item+'.png'}/>
@@ -91,71 +85,77 @@ class App extends Component {
 					)
 				})}
 
-				<div className='fly-box-btn'>
-					<Button text='点击礼盒' click={false}  className='vertical-btn'></Button>
-				</div>
+				{this.state.indexShow && <div className="fly-box">
+					<img src='./assets/images/box.png'  onTouchTap={this.showBox}/>
+				</div>}
+				
+ 				{this.state.indexShow && <div className="fly-text-img">
+					<img src='./assets/images/text.png'/>
+				</div>}
+				{this.state.indexShow && <div className={'fly-share-btn'}>
+					<img src={'./assets/images/share-btn.png'}/>
+				</div>}
 
+				<div className='fly-team' onTouchTap={this.showTeam.bind(this)}>制作团队</div>
 				<ShareCard></ShareCard>
 
+				{this.state.showTeam && <div className='fly-team-img' onTouchTap={()=>{this.setState({showTeam:false})}} style={{background:'url(./assets/images/copyright.jpg) no-repeat center',backgroundSize:'cover'}}></div>}
 
-				<Star {...starProps}></Star>
+
+				<div className='fly-share' onTouchTap={()=>{this.setState({shareShow:true})}}>
+					<img src='./assets/images/share.png'/>
+				</div>
+
+				{this.state.shareShow && <div onTouchTap={()=>{this.setState({shareShow:false})}} className='fly-share-info' style={{background:'url(./assets/images/arron1.png) no-repeat center top',backgroundSize:'cover'}}></div>}
 
 			</div>
 
 		);
 	}
 
+
+	showTeam(){
+		this.setState({
+			showTeam:true
+		})
+	}
+
 	showBox(e){//打开盒子
-		this.isShowBox = this.isShowBox || 1;
-		if(this.getStyle(e.target.parentNode,'opacity')<=.5 || this.isShowBox === 2){
-			return;
-		}
-		this.isShowBox = 2;
-		if(e.target.parentNode.classList.contains('fly-box')){
-			clearTimeout(this.entryTime);
-			e.target.src='./assets/images/boxopen.png';
-			this.setState({shadow:true});//
-			let cardC = document.querySelector('.fly-card-C');
-			cardC.classList.add('active');
-			cardC.addEventListener('webkitTransitionEnd',function(){
-				this.classList.add('big');
-			});
-		}
+		
+		let self = this;
+		e.target.src='./assets/images/boxopen.png';
+
+		this.setState({shadow:true});//
+		let cardC = document.querySelector('.fly-card-C');
+		cardC.classList.add('active');
+
+		cardC.addEventListener('webkitTransitionEnd',function(){
+			self.setState({
+				indexShow:false
+			})
+			this.classList.add('big');
+
+		});
 	}
 
-	getStyle(ele,val){
-
-	  var style = null;
-      
-      if(window.getComputedStyle) {
-          style = window.getComputedStyle(ele, null);
-      }else{
-          style = ele.currentStyle;
-      }
-   	  return style[val];
-
-	}
+	
 	 
 	componentDidMount() {
-		this.showShine();
+		//this.showShine();
 		let main = this.refs['main'];
 		this.main=  main;
 		setTimeout(()=>{
 			main.classList.add('active');
 			this.float(this); 
 		},1000);
-
-		main.querySelector('.fly-rabbit-r').addEventListener('webkitTransitionEnd',()=>{
-			setTimeout(()=>{
-				main.querySelector('.fly-rabbit-r img').src ='./assets/images/rabbit-l.png';
-			},500);
-		});
 		
 	}
 
 	float(_this){
 
-		let main = document.querySelector('.fly-main-C');
+		return;
+
+		/*let main = document.querySelector('.fly-main-C');
 
 		let petals =main.querySelectorAll('.fly-petal'),
 			latern =  main.querySelectorAll('.fly-latern'),
@@ -202,7 +202,7 @@ class App extends Component {
 				
 				petal.startMove(petal.startX,petal.startY);
 			});
-		},1000/60);
+		},1000/60);*/
 	}
 
 	showShine(){
@@ -213,27 +213,7 @@ class App extends Component {
 		}
 	}
 
-	entryDrawPannel(){//进入绘制区域
-		
-		this.main.classList.remove('active');
-		this.main.classList.add('drawscene');
-		
-		this.petalArr.forEach((petal)=>{
-			petal.stop();
-		});
-
-		this.timer && clearInterval(this.timer);
-
-		let dialog =this.main.querySelector('.fly-dialog');
-		dialog.classList.add('hide');
-		dialog.addEventListener('webkitTransitionEnd',()=>{
-			dialog.classList.add('none');
-			this.main.querySelector('.fly-sun-sm').classList.remove('active');
-			document.querySelector('.fly-draw-scene').classList.add('active');
-		});
-		this.plumOut();
-	}
-
+	
 	rabbitOut(){
 		this.main.querySelector('.fly-rabbit-r').classList.add('hide');
 		this.main.querySelector('.fly-box-btn').classList.add('hide');

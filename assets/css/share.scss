@@ -251,7 +251,7 @@ body{
 .fly-window{
   @include pos(a);
   bottom:-5.5rem;
-   @include transitionTime();
+  @include transform(translate3d(0,-5.5rem,0));
 }
 
 .fly-women{
@@ -304,36 +304,6 @@ body{
   overflow: hidden;
   &.drawscene{
     @include public();
-      .fly-box{
-        @include transition(opacity 2s);
-      }
-     .fly-window{
-         @include transform(translate3d(0,10.5rem,0));
-         &.active{
-              @include transitionDelay(0);
-              @include transform(translate3d(0,-5.5rem,0));
-         }
-      }
-      .fly-rabbit-r{
-        @include transition_transform(2.13s linear);
-      }
-
-      .fly-box-btn{
-        @include transition(2.1s  linear);
-      }
-
-      .fly-plum{
-         @include transition(opacity 3s );
-      }
-      .fly-petal{
-         @include transition(opacity 3s);
-      }
-      .fly-box{
-        &.active{
-          opacity:1;
-          @include transitionDelay(6s);
-        }
-      }
   }
   
   &.active{
@@ -342,9 +312,7 @@ body{
       @include transitionTime(4s);
       @include transform(scale(.9));
     }
-    .fly-window{
-      @include transform(translate3d(0,-5.5rem,0));   
-    }
+ 
     .fly-latern{
       opacity:1;
     }
@@ -373,19 +341,16 @@ body{
   @include pos(a);
   bottom:1.8rem;
   left: $left;
-  opacity:0;
-  @include transition(opacity 2s 4s);
+  opacity:1;
 }
 
-.fly-rabbit-r{
-  $width:2rem;
+.fly-share-btn{
+  $width:3rem;
   $left : .7rem;
   width: $width;
   bottom:3rem;
   left: $left;
   @include pos(a);
-  @include transform(translate3d(-($width + $left + 1,0,0)));
-  @include transition_transform(2.13s 5s linear);
   &.hide{
     @include transform(translate3d(-($width + $left + 1,0,0)));
   }
@@ -420,18 +385,14 @@ body{
 .fly-plum{
    width: 5rem;
    @include pos(a);
+   z-index: 20;
    top:10%;
-   @include transition(opacity 3s 4s);
-   opacity:0;
 }
 .fly-petal{
     width: .5rem;
    @include pos(a);
    top:25%;
    left:5%;
-   @include transition(opacity 3s 4s);
-   opacity:0;
-   
    &:nth-of-type(2){
      left: 10%;
      top: 30% !important;
@@ -453,7 +414,6 @@ body{
     width: 3rem;
     bottom:0;
     left: 20%;
-    opacity:0;
 }
 
 .fly-sun-sm{
@@ -562,4 +522,60 @@ body{
     @include transform(translate3d(-50%,30%,0));
     opacity:1;
   }
+}
+.fly-team{
+  @include pos(a);
+  width: .8rem;
+  font-size: .5rem;
+  color:#fff;
+  border:1px solid #fff;
+  text-align: center;
+  line-height: 24px;
+  @include br(5px);
+  right:10px;;
+  bottom:10px;
+  z-index: 100;
+}
+
+
+  .fly-text-img{
+       @include pos(a);
+       left: 2rem;
+       top: .5rem;
+       z-index: -1;
+       
+       width: 6rem;
+    }
+
+.fly-share{
+   width: 1.5rem;
+   @include pos(a);
+   top: 0;
+   right: .5rem;
+}
+
+.fly-share-info{
+  width: 100%;
+  height: 100%;
+  @include pos(a);
+  left: 0;
+  top: 0;
+  z-index: 1999;
+}
+.fly-team-img{
+  @include pos(f);
+  left:0;
+  top:0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+}
+
+.fly-logo{
+  width: 2rem;
+  @include pos(a);
+  bottom:.5rem;
+  z-index: 10;
+  left: 1rem;
+
 }

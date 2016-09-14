@@ -1,20 +1,23 @@
 .fly-draw-scene {
   width: 10rem;
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 1rem;
+  z-index: 20;
   display: none; }
   .fly-draw-scene.active {
     display: block; }
+  .fly-draw-scene textarea {
+    font-size: .45rem; }
   .fly-draw-scene .fly-text-img {
     position: absolute;
-    left: 1rem;
+    left: 2rem;
     top: 0;
     opacity: 0;
     z-index: -1;
     -webkit-transition: 5s opacity 2s;
     transition: 5s opacity 2s;
-    width: 8rem; }
+    width: 6rem; }
     .fly-draw-scene .fly-text-img.active {
       opacity: 1; }
   .fly-draw-scene .fly-share-rabbit {
@@ -42,7 +45,9 @@
     font-size: .5rem; }
   .fly-draw-scene.hide .fly-btn-C {
     -webkit-transition: -webkit-transform 0.5s;
+    transition: -webkit-transform 0.5s;
     transition: transform 0.5s;
+    transition: transform 0.5s, -webkit-transform 0.5s;
     -webkit-transition-timing-function: cubic-bezier(0, 0.9, 0.17, 1.01);
     transition-timing-function: cubic-bezier(0, 0.9, 0.17, 1.01);
     -webkit-transform: translate3d(0, 20rem, 0);
@@ -59,8 +64,10 @@
     transition: 1s opacity; }
   .fly-draw-scene.hide .fly-card-C {
     opacity: 1;
-    -webkit-transition: -webkit-transform 2s 1s;
-    transition: transform 2s 1s;
+    -webkit-transition: -webkit-transform 2s;
+    transition: -webkit-transform 2s;
+    transition: transform 2s;
+    transition: transform 2s, -webkit-transform 2s;
     left: 0;
     color: #893c0e;
     top: 1rem; }
@@ -73,6 +80,41 @@
       left: 18%;
       color: inherit;
       font-size: .4rem; }
+    .fly-draw-scene.hide .fly-card-C .fly-edit-C {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      z-index: 100;
+      background: rgba(0, 0, 0, 0.5); }
+      .fly-draw-scene.hide .fly-card-C .fly-edit-C textarea {
+        width: 100%;
+        height: 2rem; }
+      .fly-draw-scene.hide .fly-card-C .fly-edit-C section {
+        height: 4rem;
+        background: #fff; }
+      .fly-draw-scene.hide .fly-card-C .fly-edit-C .fly-button-C {
+        margin: 0 auto; }
+      .fly-draw-scene.hide .fly-card-C .fly-edit-C .fly-button-b, .fly-draw-scene.hide .fly-card-C .fly-edit-C .fly-button-t {
+        color: #666;
+        border-color: #666666; }
+        .fly-draw-scene.hide .fly-card-C .fly-edit-C .fly-button-b .linex, .fly-draw-scene.hide .fly-card-C .fly-edit-C .fly-button-b .liney, .fly-draw-scene.hide .fly-card-C .fly-edit-C .fly-button-t .linex, .fly-draw-scene.hide .fly-card-C .fly-edit-C .fly-button-t .liney {
+          border-color: #666666; }
+    .fly-draw-scene.hide .fly-card-C .fly-edit-wish {
+      position: absolute;
+      top: 10rem;
+      color: inherit;
+      width: 100%; }
+      .fly-draw-scene.hide .fly-card-C .fly-edit-wish section .fly-button-b span, .fly-draw-scene.hide .fly-card-C .fly-edit-wish section .fly-button-t span {
+        font-size: .4rem; }
+      .fly-draw-scene.hide .fly-card-C .fly-edit-wish .fly-button-C {
+        margin: 0 auto; }
+      .fly-draw-scene.hide .fly-card-C .fly-edit-wish .fly-button-b, .fly-draw-scene.hide .fly-card-C .fly-edit-wish .fly-button-t {
+        color: #666;
+        border-color: #666666; }
+        .fly-draw-scene.hide .fly-card-C .fly-edit-wish .fly-button-b .linex, .fly-draw-scene.hide .fly-card-C .fly-edit-wish .fly-button-b .liney, .fly-draw-scene.hide .fly-card-C .fly-edit-wish .fly-button-t .linex, .fly-draw-scene.hide .fly-card-C .fly-edit-wish .fly-button-t .liney {
+          border-color: #666666; }
     .fly-draw-scene.hide .fly-card-C .fly-wish-name {
       position: absolute;
       color: inherit;
@@ -116,13 +158,14 @@
           top: 89%; }
   .fly-draw-scene .fly-card-C {
     opacity: 0;
-    -webkit-transition: 2s 2s;
-    transition: 2s 2s;
+    -webkit-transition: 2s 1s;
+    transition: 2s 1s;
     position: absolute;
     -webkit-transform: translate3d(0, 3rem, 0);
     transform: translate3d(0, 3rem, 0); }
     .fly-draw-scene .fly-card-C .fly-face {
-      position: absolute; }
+      position: absolute;
+      top: 0; }
   .fly-draw-scene .fly-draw-C {
     z-index: 1;
     background: rgba(255, 255, 255, 0.3);

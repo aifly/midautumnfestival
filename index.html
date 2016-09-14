@@ -4,11 +4,13 @@
 	<meta charset='utf-8' />	
 	<title>月亮代表我的心</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+	<meta name="description" content="一轮圆月，温暖有你陪伴的时光；一段心声，跨越咫尺天涯的距离。">
 	<script>
 		document.addEventListener('touchmove',function(e){
 			e.preventDefault();
 		});
 	</script>
+
 	<style type="text/css">
 		.loading{
 			
@@ -16,17 +18,18 @@
 			top:50%;
 			left: 40%;
 		}
+		
 	</style>
 </head>
-<body>
+<body style="background:#200c41 url(./assets/images/bg.png) no-repeat center bottom;background-size: cover">
 	<div style="display: none"><img src="./assets/images/300.jpg"></div>
 	<div id="fly-main">
 		<span class="loading">正在载入...</span>
 	</div>
 	<script src='./libs/easeljs-0.8.2.min.js'></script>
 	<!--
-		<script type="text/javascript" src='./build/index.js'></script>
-	-->
 		<script src='http://localhost:3000/index.js'></script>
+	-->
+	<script type="text/javascript" src='./build/index.js'></script>
 </body>
 </html>
